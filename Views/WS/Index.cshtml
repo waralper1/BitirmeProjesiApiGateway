@@ -1,0 +1,77 @@
+﻿@model IEnumerable<BitirmeProjesiErp.Models.WSModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ApiKey)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sifre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SunucuAdi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sube)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Depo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirmaKod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DonemKod)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApiKey)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sifre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SunucuAdi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sube)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Depo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirmaKod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DonemKod)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.WSID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.WSID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.WSID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

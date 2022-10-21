@@ -1,0 +1,66 @@
+﻿@model BitirmeProjesiErp.Models.WSModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>WSModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ApiKey)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ApiKey)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Sifre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Sifre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SunucuAdi)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SunucuAdi)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Sube)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Sube)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Depo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Depo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FirmaKod)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FirmaKod)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DonemKod)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DonemKod)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.WSID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
