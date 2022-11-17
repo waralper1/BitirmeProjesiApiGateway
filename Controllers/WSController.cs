@@ -22,7 +22,12 @@ namespace BitirmeProjesiErp.Controllers
         // GET: WSModels
         public async Task<IActionResult> Index()
         {
-              return View(await _context.WebServisBilgisi.ToListAsync());
+            var webServisBilgi = await _context.WebServisBilgisi
+                .FirstOrDefaultAsync(m => m.WSID == 1);
+            //Sabitler.DiaLogin(webServisBilgi);
+            
+            //Console.WriteLine(Sabitler.DiaLogin(webServisBilgi));
+            return View(webServisBilgi);
         }
 
         // GET: WSModels/Details/5
@@ -97,6 +102,7 @@ namespace BitirmeProjesiErp.Controllers
             {
                 try
                 {
+                    
                     _context.Update(wSModel);
                     await _context.SaveChangesAsync();
                 }
@@ -111,7 +117,7 @@ namespace BitirmeProjesiErp.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
             }
             return View(wSModel);
         }
@@ -145,7 +151,7 @@ namespace BitirmeProjesiErp.Controllers
             }
             var wSModel = await _context.WebServisBilgisi.FindAsync(id);
             if (wSModel != null)
-            {
+            {//a
                 _context.WebServisBilgisi.Remove(wSModel);
             }
             

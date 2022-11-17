@@ -54,6 +54,7 @@ namespace BitirmeProjesiErp
         // sunucuya içine girilen expando objecti json stringine çevirip uygun ek ile servera yollar
         public static dynamic sendMessageToServer(dynamic obj, string ek)
         {
+            
             string jsonWS = "";
             sunucuAdresi = ("http://" + sunucuAdi + ".dia.get.tr");
             try
@@ -98,7 +99,7 @@ namespace BitirmeProjesiErp
             request.login = new ExpandoObject();
             // burda @iþareti kullanmazsam paramsý method olarak alýyor ve hata veriyor.
             request.login.@params = new ExpandoObject();
-            request.login.@params.apikey = webServisBilgi.ApiKey;
+            request.login.@params.apikey = apiKey;
             request.login.username = webServisBilgi.UserName;
             request.login.password = webServisBilgi.Sifre;
 

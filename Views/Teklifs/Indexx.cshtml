@@ -1,0 +1,385 @@
+﻿@model IEnumerable<BitirmeProjesiErp.Models.Teklif>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model._key_prj_proje)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model._key_satiselemanlari)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model._key_scf_carikart_adresleri)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model._key_scf_carikart_yetkili)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model._key_scf_odeme_plani)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model._key_sis_doviz)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model._key_sis_doviz_raporlama)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model._key_sis_sube_source)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.aciklama)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.aciklama1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.aciklama2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.aciklama3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.bagkur)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.bagkurdvz)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.bagkuryuzde)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.borsa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.borsadvz)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fisno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.belgeno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dovizkuru)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dovizturu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ekalan1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ekalan2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ekalan3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ekalan4)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ekalan5)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ekalan6)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.raporlamadovizkuru)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.saat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tarih)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.teslimattarihi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tipi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sevkadresi1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sevkadresi2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sevkadresi3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.toplam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.toplamdvz)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.toplamara)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.toplamaradvz)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.toplamindirim)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.toplamindirimdvz)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.toplamkdv)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.toplamkdvdvz)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.toplamkdvtevkifati)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.toplamkdvtevkifatidvz)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.toplammasraf)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.toplammasrafdvz)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.toplamov)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.toplamovdvz)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.turu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.onay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.odemeplaniaciklama)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.odemeplanikodu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CariKart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.aktarildi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.diakey)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.diafisno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model._key_rpr_dinamik_raporparametreleri_getirs)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item._key_prj_proje)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item._key_satiselemanlari)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item._key_scf_carikart_adresleri)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item._key_scf_carikart_yetkili)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item._key_scf_odeme_plani)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item._key_sis_doviz)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item._key_sis_doviz_raporlama)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item._key_sis_sube_source)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.aciklama)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.aciklama1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.aciklama2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.aciklama3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.bagkur)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.bagkurdvz)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.bagkuryuzde)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.borsa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.borsadvz)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fisno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.belgeno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dovizkuru)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dovizturu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ekalan1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ekalan2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ekalan3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ekalan4)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ekalan5)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ekalan6)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.raporlamadovizkuru)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.saat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tarih)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.teslimattarihi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tipi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sevkadresi1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sevkadresi2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sevkadresi3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.toplam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.toplamdvz)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.toplamara)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.toplamaradvz)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.toplamindirim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.toplamindirimdvz)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.toplamkdv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.toplamkdvdvz)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.toplamkdvtevkifati)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.toplamkdvtevkifatidvz)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.toplammasraf)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.toplammasrafdvz)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.toplamov)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.toplamovdvz)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.turu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.onay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.odemeplaniaciklama)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.odemeplanikodu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CariKart._key)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.aktarildi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.diakey)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.diafisno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item._key_rpr_dinamik_raporparametreleri_getirs)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item._key">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item._key">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item._key">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>

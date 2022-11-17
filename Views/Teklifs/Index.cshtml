@@ -1,0 +1,194 @@
+﻿@model BitirmeProjesiErp.Models.TeklifViewModel
+    @{
+    
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+    }
+    
+<!DOCTYPE html>
+<html lang="en">
+    
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>AdminLTE 3 | DataTables</title>
+    @*<link  href="src="~/plugins/jquery/jquery.js">*@
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/adminlte.min.css">
+    
+    <!-- jQuery -->
+    <script src="~/plugins/jquery/jquery.js"></script>
+     <!-- DataTables  & Plugins -->
+    <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/plugins/jszip/jszip.min.js"></script>
+    <script src="~/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="~/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/lib/bootstrap/dist/js/adminlte.min.js"></script>
+   
+    <style>
+      .kalemeditdelete { 
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+      grid-auto-columns: 1fr;
+      grid-auto-rows: 1fr;
+      gap: 0% 3%;
+      grid-auto-flow: row;
+      justify-content: center;
+      align-content: center;
+      justify-items: center;
+      align-items: center;
+      grid-template-areas:
+        "aktar edit delete yazdir";
+        }
+        .aktar {
+        justify-self: stretch;
+        grid-area: aktar;
+        }
+        .edit {
+        justify-self: stretch;
+        grid-area: edit;
+        }
+
+        .delete {
+      justify-self: stretch;
+      align-self: center;
+      grid-area: delete;
+        }
+        
+
+      .yazdir {
+      justify-self: stretch;
+      align-self: center;
+      grid-area: yazdir;
+      }
+    }
+</style>
+    <script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#myButtons');
+    
+  });
+</script>
+
+  </head>
+  
+
+<body class="hold-transition">
+
+            <!-- Main content -->
+            <section class="content">
+              <div class="container-fluid">
+                <div >
+                  <div>
+                    <div class="card">
+                      
+                      <!-- /.card-header -->                      
+                      <div class="card-body">
+                       
+
+                        <table id="example1" class="table table-bordered table-striped">
+                            
+                          <thead>
+                            <tr>
+                              <th>Tarih</th>
+                              <th>Fişno</th>
+                              <th>Dia Fişno</th>
+                              <th>Açıklama</th>
+                              <th>Ünvan</th>
+                              <th>Toplam</th>
+                              <th class="card-header " id="myButtons"></th>
+                            </tr>
+                          </thead>
+                          <tbody> @foreach (var item in Model.teklifs) { <tr>
+                              <td> @Html.DisplayFor(modelItem => item.tarih)</td>
+                              <td> @Html.DisplayFor(modelItem => item.fisno) </td>
+                              <td> @Html.DisplayFor(modelItem => item.diafisno) </td>
+                              <td> @Html.DisplayFor(modelItem => item.aciklama1) </td>
+                              <td> @Html.DisplayFor(modelItem => item.CariKart.unvan) </td>
+                              <td> @Html.DisplayFor(modelItem => item.toplam) <strong> @Html.DisplayFor(modelItem => item.dovizturu) </strong> </td>
+                              <td>
+                                  <div class="kalemeditdelete">
+                                       
+                                      <div class="aktar"> <a   type="button" class="btn btn-info btn-block btn-flat bg-info" asp-controller="Sender" asp-action="Edit" asp-route-id="@item._key">
+                                      <i class="fas fa-play"></i>Aktar</a></div>
+                                      <div class="edit"> <a type="button" class="btn btn-info btn-block btn-flat bg-warning" asp-action="Edit" asp-route-id="@item._key" >
+                                      <i class="fas fa-edit"></i> Düzenle</a></div>
+                                      <div class="delete"><a type="button" class="btn btn-info btn-block btn-flat bg-danger" asp-action="Delete" asp-route-id="@item._key">
+                                      <i class="fa fa-trash"></i> Sil</a></div>
+                                      
+                                      <div class="yazdir"><a type="Yazdır"id="yazdir" class="btn btn-info btn-block btn-flat bg-secondary"target="_blank" asp-action="Yazdir" asp-route-_key="@item._key_rpr_dinamik_raporparametreleri_getirs" asp-route-id="@item.diakey" > 
+                                      <i class="fas fa-barcode"></i> Yazdır</a></div>
+                                    </div>
+                                  @*<a asp-action="Edit" asp-route-id="@item._key">Edit</a> | <a asp-action="Details" asp-route-id="@item._key">Details</a> | <a asp-action="Delete" asp-route-id="@item._key">Delete</a>*@
+                                  </td>
+                            </tr> }
+                            </tbody>
+                          <tfoot>
+                            <tr>
+                              <th>Tarih</th>
+                              <th>Fişno</th>
+                              <th>Ödeme Plani</th>
+                              <th>Açıklama</th>
+                              <th>Ünvan</th>
+                              <th>Toplam</th>
+                              <th>
+                              <a asp-action="TeklifCreate" ><button type="button" class="btn btn-block bg-gradient-primary btn-lg" >Teklif Ekle</button></a>
+                              @*<p><a asp-action="Create">Create New</a></p>*@
+                              </th>
+                            </tr>
+                          </tfoot>
+                        </table>
+                       
+
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <div class="card-header col-6" id="myButtons"></div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  
+
+
+    
+
+</body>
+@*<script>
+    $('#yazdir').click(function (e) {
+    // if using type="submit", this is mandatory
+    e.preventDefault();
+
+    window.open('@Url.Action("Yazdir", "Teklifs", new { id = "@item._key",_key="@item._key_rpr_dinamik_raporparametreleri_getirs" })', '_blank');
+});
+</script>*@
+</html>

@@ -1,0 +1,120 @@
+﻿@using static BitirmeProjesiErp.Helpers.NavigationIndicatorHelper;
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a href="~/Home" class="brand-link">
+        
+    </a>
+    <div class="sidebar">
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+            <img src="~/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+            <a href="#" class="d-block">Merhaba, @User.Identity.Name </a>
+        </div> 
+    </div>
+}
+else
+{
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="info">
+            <a href="#" class="d-block">Merhaba, Ziyaretçi</a>
+        </div>
+    </div>
+}
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item ">
+                    <a asp-controller="Home" asp-action="Index" class="nav-link @Url.MakeActiveClass("home","index")">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>
+                            Anasayfa
+                        </p>
+                    </a>
+                </li>
+@*                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item ">
+                        <a asp-controller="Home" asp-action="Privacy" class="nav-link @Url.MakeActiveClass("home","privacy")">
+                            <i class="nav-icon fas fa-lock"></i>
+                            <p>
+                                Privacy
+                            </p>
+                        </a>
+                    </li>
+                }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item ">
+                        <a asp-controller="Settings" asp-action="index" class="nav-link @Url.MakeActiveClass("settings","index")">
+                            <i class="nav-icon fas fa-lock"></i>
+                            <p>
+                                Settings
+                            </p>
+                        </a>
+                    </li>
+                }*@
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item ">
+                        <a asp-controller="Teklifs" asp-action="Index" class="nav-link @Url.MakeActiveClass("Teklifs","Index")">
+                            <i class="nav-icon fas fa-lock"></i>
+                            <p>
+                                Teklif
+                            </p>
+                        </a>
+                    </li>
+                }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item ">
+                        <a asp-controller="WS" asp-action="Edit" asp-route-id="1" class="nav-link @Url.MakeActiveClass("WS","edit")">
+                            <i class="nav-icon fas fa-lock"></i>
+                            <p>
+                                Parametreler
+                            </p>
+                            
+                        </a>
+                    </li>
+
+
+                }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item ">
+                        <a asp-controller="Teklifs" asp-action="test"  class="nav-link @Url.MakeActiveClass("Teklifs","test")">
+                            <i class="nav-icon fas fa-lock"></i>
+                            <p>
+                                test
+                            </p>
+                            
+                        </a>
+                    </li>
+
+
+                }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item ">
+                        
+                    @using (Html.BeginForm("VeriEsle", "VeriCek", FormMethod.Post))
+    {
+        
+                
+                
+            <button type="submit" class="btn btn-outline-primary btn-block"><i class="fa fa-bell"></i> Güncelle</button>
+        
+    }
+                          </li>
+
+
+                }
+
+
+
+                
+            </ul>
+        </nav>
+    </div>
+</aside>

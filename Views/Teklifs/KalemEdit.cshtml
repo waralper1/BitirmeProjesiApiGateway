@@ -1,0 +1,397 @@
+﻿
+<head>
+@model BitirmeProjesiErp.Models.TeklifKalemi
+
+@{
+    
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+    }
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/adminlte.min.css">
+    
+    <link rel="stylesheet" href="~/plugins/select2/css/select2.css">
+    <!-- jQuery -->
+    <script src="~/plugins/jquery/jquery.js"></script>
+    <script src="~/plugins/jquery-ui/jquery-ui.min.js"></script>
+     <!-- DataTables  & Plugins -->
+    <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/plugins/jszip/jszip.min.js"></script>
+    <script src="~/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="~/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/lib/bootstrap/dist/js/adminlte.min.js"></script>
+    <script src="~/plugins/select2/js/select2.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+      $(function () {
+        $("#stoks").select2();
+      });
+    </script>
+ <style>
+     .select2-container--default .select2-selection--single .select2-selection__rendered{line-height: 100%;}
+.kalemdetaylar {  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: min-content min-content min-content min-content auto auto auto auto;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "kalemturu kalemturu"
+    "miktar-birim-doviz miktar-birim-doviz"
+    "notlar enboy"
+    "savebutton tahmin"
+    ". ."
+    ". ."
+    ". ."
+    ". .";
+}
+
+.kalemturu {  display: grid;
+  grid-template-columns: 12.3% 87.7%;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "kalemturulabel kalemturuvalue";
+  grid-area: kalemturu;
+}
+
+.kalemturulabel {
+  justify-self: start;
+  align-self: center;
+  grid-area: kalemturulabel;
+}
+
+.kalemturuvalue {
+  justify-self: start;
+  align-self: center;
+  grid-area: kalemturuvalue;
+}
+
+.miktar-birim-doviz {  display: grid;
+  grid-template-columns: 33.3% 34.3% 32.4%;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "miktar birim doviz";
+  grid-area: miktar-birim-doviz;
+}
+
+.miktar {  display: grid;
+  grid-template-columns: 37% 63%;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "miktarlabel miktarvalue";
+  grid-area: miktar;
+}
+
+.miktarlabel {
+  justify-self: start;
+  align-self: center;
+  grid-area: miktarlabel;
+}
+
+.miktarvalue {
+  justify-self: start;
+  align-self: center;
+  grid-area: miktarvalue;
+}
+
+.birim {  display: grid;
+  grid-template-columns: 37% 63%;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "birimlabel birimvalue";
+  justify-self: stretch;
+  grid-area: birim;
+}
+
+.birimlabel {
+  justify-self: center;
+  align-self: center;
+  grid-area: birimlabel;
+}
+
+.birimvalue {  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  justify-items: center;
+  align-items: center;
+  grid-template-areas:
+    "birimvalue1 birimvalue2";
+  justify-self: stretch;
+  align-self: stretch;
+  grid-area: birimvalue;
+}
+
+.birimvalue1 {
+  justify-self: stretch;
+  grid-area: birimvalue1;
+}
+
+.birimvalue2 {
+  justify-self: start;
+  grid-area: birimvalue2;
+}
+
+.doviz {  display: grid;
+  grid-template-columns: 31% 69%;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "dovizlabel dovizvalue";
+  justify-self: stretch;
+  grid-area: doviz;
+}
+
+.dovizlabel {
+  justify-self: center;
+  align-self: center;
+  grid-area: dovizlabel;
+}
+
+.dovizvalue {  display: grid;
+  grid-template-columns: 0.7fr 1.3fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "dovizvalue1 dovizvalue2";
+  grid-area: dovizvalue;
+}
+
+.dovizvalue1 {
+  justify-self: stretch;
+  align-self: center;
+  grid-area: dovizvalue1;
+}
+
+.dovizvalue2 {
+  justify-self: start;
+  align-self: center;
+  grid-area: dovizvalue2;
+}
+
+.notlar {  display: grid;
+  grid-template-columns: 24.5% 75.5%;
+  grid-template-rows: 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "notlabel not1"
+    "notlabel not2";
+  grid-area: notlar;
+}
+
+.notlabel {
+  justify-self: start;
+  align-self: center;
+  grid-area: notlabel;
+}
+
+.not1 {
+  justify-self: start;
+  align-self: end;
+  grid-area: not1;
+}
+
+.not2 {
+  justify-self: start;
+  align-self: start;
+  grid-area: not2;
+}
+
+.enboy {  display: grid;
+  grid-template-columns: 0.7fr 1.3fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "genisliklabel envalue"
+    "yuksekliklabel yukseklikvalue";
+  grid-area: enboy;
+}
+
+.genisliklabel {
+  justify-self: start;
+  align-self: center;
+  grid-area: genisliklabel;
+}
+
+.yuksekliklabel {
+  justify-self: start;
+  align-self: center;
+  grid-area: yuksekliklabel;
+}
+
+.envalue { grid-area: envalue; }
+
+.yukseklikvalue { grid-area: yukseklikvalue; }
+
+.tahmin {  display: grid;
+  grid-template-columns: 0.7fr 1.3fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "tahminbutton tahminvalue"
+    ". ."
+    ". ."
+    ". .";
+  grid-area: tahmin;
+}
+
+.tahminvalue { grid-area: tahminvalue; }
+
+.tahminbutton {
+  justify-self: center;
+  align-self: center;
+  grid-area: tahminbutton;
+}
+
+.savebutton {  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "button button ."
+    ". . ."
+    ". . .";
+  grid-area: savebutton;
+}
+
+.button { grid-area: button; }
+
+ </style>
+
+    </head>
+<div  style="width: 50%;  height: 50%">
+        <div class="card-header">
+                <h3 class="card-title">Kalem Düzenle</h3>
+              </div>
+        <form asp-action="KalemEdit">
+  <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+  
+
+  <div class="kalemdetaylar">
+  <div class="kalemturu">
+    <div class="kalemturulabel"><label asp-for="_key_kalemturu" class="control-label"> Kalem Türü</label></div>
+    <div class="kalemturuvalue"><select id="stoks" asp-for="_key_kalemturu" class="form-control" asp-items="Model.StokKarts"></select>
+                <span asp-validation-for="_key_kalemturu" class="text-danger"></span></div>
+  </div>
+  <div class="miktar-birim-doviz">
+    <div class="miktar">
+      <div class="miktarlabel"><label asp-for="miktar" class="control-label">Birim</label></div>
+      <div class="miktarvalue"><input id="bfiyat" type="number" step="any" asp-for="birimfiyati" class="form-control" />
+                <span asp-validation-for="birimfiyati" class="text-danger"></span></div>
+    </div>
+    <div class="birim">
+      <div class="birimlabel"><label class="control-label">Miktar</label></div>
+      <div class="birimvalue">
+        <div class="birimvalue1"><select asp-for="birimadi" class="form-control" >
+                        <option>Adet</option><option>Koli</option><option>Metre</option></select></div>
+        <div class="birimvalue2"><input type="number" step="any" asp-for="miktar" class="form-control" />
+                <span asp-validation-for="miktar" class="text-danger"></span></div>
+      </div>
+    </div>
+    <div class="doviz">
+      <div class="dovizlabel"><label class="control-label">Doviz Adı</label></div>
+      <div class="dovizvalue">
+        <div class="dovizvalue1"><select asp-for="dovizadi" class="form-control" >
+                        <option>TL</option><option>USD</option><option>EUR</option></select></div>
+        <div class="dovizvalue2"><input type="number" step="any" asp-for="dovizkuru" class="form-control" />
+                <span asp-validation-for="dovizkuru" class="text-danger"></span></div>
+      </div>
+    </div>
+  </div>
+  <div class="notlar">
+    <div class="notlabel"><label asp-for="note" class="control-label">Notlar</label></div>
+    <div class="not1"><input asp-for="note" class="form-control" />
+                <span asp-validation-for="note" class="text-danger"></span></div>
+    <div class="not2"><input asp-for="note2" class="form-control" />
+                <span asp-validation-for="note2" class="text-danger"></span></div>
+  </div>
+  
+  <div class="enboy">
+    <div class="genisliklabel"><label  class="control-label">Genişlik</label></div><div class="envalue"></div>
+    <div class="yuksekliklabel"><label  class="control-label">Yükseklik</label></div><div class="boyvalue"></div>
+    <div class="envalue"><input id="genislik" value="2500" /></div>
+    <div class="yukseklikvalue"><input id="boy" value="2500"/></div>
+    
+  </div>
+  <div class="savebutton">
+    <div ><button asp-route-id="@Model._key_scf_teklif" type="submit" class="btn btn-app bg-success">
+                          <i class="fas fa-save"></i> Kaydet
+                        </button>
+        
+  </form></div>
+  </div>
+  <div class="tahmin">
+      <div class="tahminbutton"><button id="AddComment"runat="server" type="button" class="btn btn-app bg-secondary">
+                          <i class="fas fa-play"></i> Fiyat Getir
+                        </button></div>
+    <div class="tahminvalue"><div class="fiyattahmin"><div id="tahmin"></div></div>
+    
+  </div>
+  
+</div>
+
+<script>
+ $(function () {
+  $("#AddComment").click(function () {
+    
+
+    var genislik = document.getElementById("genislik").value;
+    var boy = document.getElementById("boy").value;
+
+        $.ajax({
+            url: '@Url.Action("FiyatTahmin","Teklifs" )',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: {"genislik" :genislik,"boy":boy },
+            //error: alert("alpererror"),
+            success: function(response){
+                //alert(response);
+                    document.getElementById("bfiyat").value = response;
+                    document.getElementById("tahmin").innerHTML = 
+                    "<p>Tahmini Birim Fiyatı: <strong>" + response + "</strong></p>"
+                    //                "<div class='media'>" +
+                    //                    "<div class='media-body'>" +
+                    //                        "<a href='' class='comment-author'>"+UserName+"</a>" +
+                    //                        "<span class='CommetText' id='CommentText-" + PostId + "'>" + CommentText + "</span>" +
+                    //                    "</div>" +
+                    //                "</div>" +
+                    //            "</li>"
+                    ;
+            }
+        });
+       
+});
+});
+</script>
