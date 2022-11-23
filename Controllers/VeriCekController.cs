@@ -60,37 +60,36 @@ namespace BitirmeProjesiErp.Controllers
                     bool flag = await _scfcontext.CariKarts.AnyAsync(x => x._key == temp2); // if _key exists flag==true
                     cariKart = await _scfcontext.CariKarts.FirstOrDefaultAsync(u => u._key == temp2);
                     CariKart Cari = new CariKart();
-                    Cari._key = temp2;
-                    Cari.unvan = carilerObj[i].unvan;
-                    UpdateCari(Cari, temp2, flag);
-                    //if (flag)
-                    //{
-                    //    CariKart Cari = new CariKart();
-                    //    Cari.unvan = carilerObj[i].unvan;
-                    //    UpdateCari(Cari, temp2,flag);
-                    //    await _scfcontext.SaveChangesAsync();
+                    //Cari._key = temp2;
+                    //Cari.unvan = carilerObj[i].unvan;
+                    //UpdateCari(Cari, temp2, flag);
+                    if (flag)
+                    {
+                        CariKart Cariupdate = await _scfcontext.CariKarts.FirstOrDefaultAsync(u => u._key == temp2);
+                        Cariupdate.unvan = carilerObj[i].unvan;
+                        //UpdateCari(Cari, temp2, flag);
+                        _scfcontext.CariKarts.Update(Cariupdate);
+                        await _scfcontext.SaveChangesAsync();
+                        try
+                        {
+                            await _scfcontext.SaveChangesAsync();
+                        }
+                        catch (DbUpdateConcurrencyException ex)
+                        {
+                            ex.Entries.Single().Reload();
+                            await _scfcontext.SaveChangesAsync();
 
+                        }
+                    }
 
-                    //    try
-                    //    {
-                    //        await _scfcontext.SaveChangesAsync();
-                    //    }
-                    //    catch (DbUpdateConcurrencyException ex)
-                    //    {
-                    //        ex.Entries.Single().Reload();
-                    //        await _scfcontext.SaveChangesAsync();
-
-                    //    }
-                    //}
-
-                    //else
-                    //{
-                    //    CariKart Cari = new CariKart();
-                    //    Cari._key = carilerObj[i]._key;
-                    //    Cari.unvan = carilerObj[i].unvan;
-                    //    _scfcontext.CariKarts.Add(Cari);
-                    //    _scfcontext.SaveChanges();
-                    //}
+                    else
+                    {
+                        //CariKart Cari = new CariKart();
+                        Cari._key = carilerObj[i]._key;
+                        Cari.unvan = carilerObj[i].unvan;
+                        _scfcontext.CariKarts.Add(Cari);
+                        _scfcontext.SaveChanges();
+                    }
                 }
                 i = 0;
 
@@ -120,29 +119,30 @@ namespace BitirmeProjesiErp.Controllers
             request.scf_carikart_listele.donem_kodu = int.Parse(webServisBilgi.DonemKod);
             return request;
         }
-        public bool UpdateCari(CariKart Cari, string id,bool flag)// eğer var ise cariyi günceller.
-        {
+        //public bool UpdateCari(CariKart Cari, string id,bool flag)// eğer var ise cariyi günceller.
+        //{
 
-            var cariKart = _scfcontext.CariKarts.FirstOrDefault(u => u._key == id);
-            if(cariKart == null)
-            {
-                cariKart.unvan = Cari.unvan;
-                cariKart._key = Cari._key;
-                _scfcontext.CariKarts.Add(cariKart);
-                _scfcontext.SaveChanges();
-            }
+        //    CariKart cariKart = _scfcontext.CariKarts.FirstOrDefault(u => u._key == id);
+        //    var alper = 123;
+        //    if(cariKart == null)
+        //    {
+        //        cariKart.unvan = Cari.unvan;
+        //        cariKart._key = Cari._key;
+        //        _scfcontext.CariKarts.Add(cariKart);
+        //        _scfcontext.SaveChanges();
+        //    }
             
 
-            if (flag)
-            {
-                _scfcontext.CariKarts.Update(cariKart);
-                _scfcontext.SaveChanges();
-            }
-            else
-            {
+        //    if (flag)
+        //    {
+        //        _scfcontext.CariKarts.Update(cariKart);
+        //        _scfcontext.SaveChanges();
+        //    }
+        //    else
+        //    {
                 
-            }
-            return true;
-        }
+        //    }
+        //    return true;
+        //}
     }
 }
