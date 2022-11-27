@@ -4,12 +4,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BitirmeProjesiErp.Models
 {
+
+    
     public class Teklif
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string _key { get; set; }
-        //public string KalemID { get; set; }a
+        //public string KalemID { get; set; }
         public string _key_prj_proje { get; set; }//public virtual _key_prj_proje _key_prj_proje { get; set; }
         [ForeignKey("CariKart")]
         public string _key_scf_carikart { get; set; }//public virtual _key_scf_carikart _key_scf_carikart { get; set; }
@@ -154,14 +156,16 @@ namespace BitirmeProjesiErp.Models
         //[DatabaseGenerated(DatabaseGeneratedOption.)]
         public string _key { get; set; }
         [ForeignKey("StokKart")]
-        public string _key_kalemturu { get; set; }
-        public string _key_sis_sube_source { get; set; }
-        public string _key_prj_proje { get; set; }
-        public string _key_scf_fiyatkart { get; set; }
-        public string _key_scf_odeme_plani { get; set; }
-        public string _key_scf_teklif { get; set; }
+        public string _key_kalemturu { get; set; }//public virtual _key_kalemturu _key_kalemturu { get; set; }
+        public string _key_sis_sube_source { get; set; }//public virtual _key_sis_sube_source _key_sis_sube_source { get; set; }
+        public string _key_prj_proje { get; set; }//public virtual _key_prj_proje _key_prj_proje { get; set; }
+        public string _key_scf_fiyatkart { get; set; }//public virtual _key_scf_fiyatkart _key_scf_fiyatkart { get; set; }
+        public string _key_scf_odeme_plani { get; set; }//public virtual _key_scf_odeme_plani _key_scf_odeme_plani { get; set; }
+        [ForeignKey("Teklif")]
+        public string _key_scf_teklif { get; set; }//public virtual _key_scf_teklif _key_scf_teklif { get; set; }
         [ForeignKey("Doviz")]
-        public string _key_sis_doviz { get; set; }
+        public string _key_sis_doviz { get; set; }//public virtual _key_sis_doviz _key_sis_doviz { get; set; }
+        //public string _key_scf_kalem_birimleri { get; set; }//public virtual _key_sis_doviz _key_sis_doviz { get; set; }
 
         [ForeignKey("SatisElemanlari")]
         public string _key_scf_satiselemani { get; set; }
@@ -178,7 +182,30 @@ namespace BitirmeProjesiErp.Models
         public StokKart StokKart { get; set; }
         public Teklif teklif { get; set; }
 
-        
+        #region relations
+        //    T1._cdate,
+        //T1._date,
+        //T1._key,
+        //+ T1._key_kalemturu,
+        //T1._key_muh_masrafmerkezi,
+        //+ T1._key_prj_proje,
+        //+ T1._key_scf_fiyatkart,
+        //T1._key_scf_kalem_birimleri,
+        //+ T1._key_scf_odeme_plani,
+        //T1._key_scf_promosyon,
+        //T1._key_scf_satiselemani,
+        //T1._key_scf_siparis_kalemi_devir,
+        //T1._key_scf_talep_kalemi,
+        //T1._key_scf_talep_kalemi_devir,
+        //+ T1._key_scf_teklif,
+        //T1._key_scf_teklif_kalemi_oncekidonem,
+        //T1._key_shy_servisformu_malzemehizmet,
+        //T1._key_sis_depo_dest,
+        //T1._key_sis_depo_source,
+        //+ T1._key_sis_doviz,
+        //T1._key_sis_kullanici_onaylayan,
+        //T1._key_sis_ozelkod
+        #endregion
     }
     public class StokKart
     {
@@ -192,7 +219,18 @@ namespace BitirmeProjesiErp.Models
         public string birimkeyleri { get; set; }
     }
 
-    
+    //gerek kalmadı
+    //public class StokKartBirimleri
+    //{
+    //    [Key]
+    //    [DatabaseGenerated(DatabaseGeneratedOption.None)]
+    //    public string _key { get; set; }
+    //    [ForeignKey("StokKart")]
+    //    public string _key_scf_stokkart { get; set; }//public virtual _key_scf_stokkart _key_scf_stokkart { get; set; }
+    //    public string birimadlari { get; set; }
+    //    public string birimkeyleri { get; set; }
+
+    //}
     public class Varyant
     {
         [Key]
@@ -237,4 +275,6 @@ namespace BitirmeProjesiErp.Models
         public string subeadi { get; set; }
 
     }
+
+
 }

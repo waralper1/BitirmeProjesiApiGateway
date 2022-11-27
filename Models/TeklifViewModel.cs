@@ -4,6 +4,18 @@ using Microsoft.EntityFrameworkCore;
 namespace BitirmeProjesiErp.Models
 {
     [Keyless]
+    public class KalemViewModel
+    {
+        public Teklif teklif { get; set; }
+        public /*List<CariKart>*/ IEnumerable<StokKart> stoks { get; set; }
+        public /*IEnumerable<SelectListItem>*/string stokkey { get; set; }
+        public /*List<TeklifKalemi>*/TeklifKalemi teklifKalemi { get; set; }
+        public /*List<CariKart>*/ IEnumerable<TeklifKalemi> teklifKalemis { get; set; }
+        public /*List<TeklifKalemi>*/IEnumerable<SelectListItem> Dovizs { get; set; }
+
+    }
+
+    [Keyless]
     public class TeklifViewModel
     {
 

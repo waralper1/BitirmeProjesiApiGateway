@@ -26,7 +26,7 @@ namespace BitirmeProjesiErp
         public static string sunucuAdresi;
         public static string apiKey = "736c1d33-e92f-4131-86f1-775dd7885d47";
         //public static string sunucuAdresi = "http://rcuretimo.dia.gen.tr";
-
+        public static double tekliftoplam;
         public static string kurlar;
         public static string eur;
         public static string usd;
