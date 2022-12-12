@@ -9,6 +9,22 @@ namespace BitirmeProjesiErp.Migrations.scf
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "CariKartAdreslers",
+                columns: table => new
+                {
+                    _key = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    _key_scf_carikart = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    adresadi = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    carikartunvani = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    adres1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    adres2 = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CariKartAdreslers", x => x._key);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CariKarts",
                 columns: table => new
                 {
@@ -22,7 +38,40 @@ namespace BitirmeProjesiErp.Migrations.scf
                 });
 
             migrationBuilder.CreateTable(
-                name: "Rpr_dinamik_raporparametreleri_getir",
+                name: "CariKartYetkilis",
+                columns: table => new
+                {
+                    _key = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    _key_scf_carikart = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    _key_sis_rehber_karti = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    adsoyad = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    carikartkodu = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    kodu = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ceptelno = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    istelno = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    gorev = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CariKartYetkilis", x => x._key);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Dovizs",
+                columns: table => new
+                {
+                    _key = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    adi = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    uzunadi = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    aktif = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Dovizs", x => x._key);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "rpr_dinamik_raporparametreleri_getir",
                 columns: table => new
                 {
                     _key = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -30,7 +79,7 @@ namespace BitirmeProjesiErp.Migrations.scf
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Rpr_dinamik_raporparametreleri_getir", x => x._key);
+                    table.PrimaryKey("PK_rpr_dinamik_raporparametreleri_getir", x => x._key);
                 });
 
             migrationBuilder.CreateTable(
@@ -109,10 +158,13 @@ namespace BitirmeProjesiErp.Migrations.scf
                     odemeplaniaciklama = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     odemeplanikodu = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     aktarildi = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    rpr_dinamik_raporparametreleri_getirs_key = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    rpr_dinamik_raporparametreleri_getirs_key = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     diakey = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     diafisno = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    _key_rpr_dinamik_raporparametreleri_getirs = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    _key_rpr_dinamik_raporparametreleri_getirs = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    dinamik7 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    dinamik8 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    dinamik10 = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -124,15 +176,14 @@ namespace BitirmeProjesiErp.Migrations.scf
                         principalColumn: "_key",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Teklifs_Rpr_dinamik_raporparametreleri_getir_rpr_dinamik_raporparametreleri_getirs_key",
+                        name: "FK_Teklifs_rpr_dinamik_raporparametreleri_getir_rpr_dinamik_raporparametreleri_getirs_key",
                         column: x => x.rpr_dinamik_raporparametreleri_getirs_key,
-                        principalTable: "Rpr_dinamik_raporparametreleri_getir",
-                        principalColumn: "_key",
-                        onDelete: ReferentialAction.Cascade);
+                        principalTable: "rpr_dinamik_raporparametreleri_getir",
+                        principalColumn: "_key");
                 });
 
             migrationBuilder.CreateTable(
-                name: "OdemePlani",
+                name: "OdemePlanis",
                 columns: table => new
                 {
                     _key = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -143,16 +194,16 @@ namespace BitirmeProjesiErp.Migrations.scf
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OdemePlani", x => x._key);
+                    table.PrimaryKey("PK_OdemePlanis", x => x._key);
                     table.ForeignKey(
-                        name: "FK_OdemePlani_Teklifs_Teklif_key",
+                        name: "FK_OdemePlanis_Teklifs_Teklif_key",
                         column: x => x.Teklif_key,
                         principalTable: "Teklifs",
                         principalColumn: "_key");
                 });
 
             migrationBuilder.CreateTable(
-                name: "SatisElemanlari",
+                name: "SatisElemanlaris",
                 columns: table => new
                 {
                     _key = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -165,9 +216,9 @@ namespace BitirmeProjesiErp.Migrations.scf
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SatisElemanlari", x => x._key);
+                    table.PrimaryKey("PK_SatisElemanlaris", x => x._key);
                     table.ForeignKey(
-                        name: "FK_SatisElemanlari_Teklifs_Teklif_key",
+                        name: "FK_SatisElemanlaris_Teklifs_Teklif_key",
                         column: x => x.Teklif_key,
                         principalTable: "Teklifs",
                         principalColumn: "_key");
@@ -213,14 +264,37 @@ namespace BitirmeProjesiErp.Migrations.scf
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "TeklifViewModel",
+                columns: table => new
+                {
+                    teklif_key = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    carikey = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CariKart_key = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.ForeignKey(
+                        name: "FK_TeklifViewModel_CariKarts_CariKart_key",
+                        column: x => x.CariKart_key,
+                        principalTable: "CariKarts",
+                        principalColumn: "_key");
+                    table.ForeignKey(
+                        name: "FK_TeklifViewModel_Teklifs_teklif_key",
+                        column: x => x.teklif_key,
+                        principalTable: "Teklifs",
+                        principalColumn: "_key",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
-                name: "IX_OdemePlani_Teklif_key",
-                table: "OdemePlani",
+                name: "IX_OdemePlanis_Teklif_key",
+                table: "OdemePlanis",
                 column: "Teklif_key");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SatisElemanlari_Teklif_key",
-                table: "SatisElemanlari",
+                name: "IX_SatisElemanlaris_Teklif_key",
+                table: "SatisElemanlaris",
                 column: "Teklif_key");
 
             migrationBuilder.CreateIndex(
@@ -242,18 +316,40 @@ namespace BitirmeProjesiErp.Migrations.scf
                 name: "IX_Teklifs_rpr_dinamik_raporparametreleri_getirs_key",
                 table: "Teklifs",
                 column: "rpr_dinamik_raporparametreleri_getirs_key");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TeklifViewModel_CariKart_key",
+                table: "TeklifViewModel",
+                column: "CariKart_key");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TeklifViewModel_teklif_key",
+                table: "TeklifViewModel",
+                column: "teklif_key");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "OdemePlani");
+                name: "CariKartAdreslers");
 
             migrationBuilder.DropTable(
-                name: "SatisElemanlari");
+                name: "CariKartYetkilis");
+
+            migrationBuilder.DropTable(
+                name: "Dovizs");
+
+            migrationBuilder.DropTable(
+                name: "OdemePlanis");
+
+            migrationBuilder.DropTable(
+                name: "SatisElemanlaris");
 
             migrationBuilder.DropTable(
                 name: "TeklifKalemis");
+
+            migrationBuilder.DropTable(
+                name: "TeklifViewModel");
 
             migrationBuilder.DropTable(
                 name: "StokKarts");
@@ -265,7 +361,7 @@ namespace BitirmeProjesiErp.Migrations.scf
                 name: "CariKarts");
 
             migrationBuilder.DropTable(
-                name: "Rpr_dinamik_raporparametreleri_getir");
+                name: "rpr_dinamik_raporparametreleri_getir");
         }
     }
 }

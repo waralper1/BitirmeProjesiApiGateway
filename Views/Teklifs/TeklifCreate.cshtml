@@ -53,25 +53,65 @@
         $("#tasarim").select2();
       });
     </script>
-    
-@*    <script>
+    <script type="text/javascript">
+        //en son burada kaldım seçili cariye gore yetkili getircem
+      $(document).ready(function () {
+          //Dropdownlist Selectedchange event
+          $("#cari").change(function () {
+              $("#yetkili").empty();
+              $.ajax({
+                  type: 'POST',
+                  url: '@Url.Action("CariYetkiliGetir")', // we are calling json method
+                  dataType: 'json',
+                  data: { id: $("#cari").val() },
+                  success: function (states) {
+                      // states contains the JSON formatted list
+                      // of states passed from the controller
+                      $("#yetkili").empty();
+                      $("#yetkili").append('<option value="' + "0" + '">' + "Lütfen Yetkili Seçiniz" + '</option>');
+                      debugger;
+                      $.each(states, function (i, state) {
+                          $("#yetkili").append('<option value="' + state.value + '">' + state.text + '</option>');
+                          // here we are adding option for States
+                      });
 
-            $("select").select2({
+                  },
+                  error: function (ex) {
+                      alert('Failed to retrieve states.' + ex);
+                  }
+              });
 
-            // Options
+              $.ajax({
+                  type: 'POST',
+                  url: '@Url.Action("CariAdresGetir")', // we are calling json method
+                  dataType: 'json',
+                  data: { id: $("#cari").val() },
+                  success: function (states) {
+                      // states contains the JSON formatted list
+                      // of states passed from the controller
+                      $("#adres").empty();
+                      $("#adres").append('<option value="' + "0" + '">' + "Lütfen Adres Seçiniz" + '</option>');
+                      debugger;
+                      $.each(states, function (i, state) {
+                          $("#adres").append('<option value="' + state.value + '">' + state.text + '</option>');
+                          // here we are adding option for States
+                      });
 
-        }).on('select2:open',function(){
+                  },
+                  error: function (ex) {
+                      alert('Failed to retrieve states.' + ex);
+                  }
+              });
+              //EN SON BURADA KALDIM, EDİT YAPARKEN SEVK ADRESİ SELECLİSTİNDE FATURA ADRESİ YAZMIYOR VE O ADRES KEYİ GELMİYOR.
+              return false;
+          })
+      });
+</script>
 
-            $('.select2-dropdown--above').attr('id','fix');
-            $('#fix').removeClass('select2-dropdown--above');
-            $('#fix').addClass('select2-dropdown--below');
-
-        });
-        </script>*@
-      <script>
-  $( function() {
-    $( "#tabs" ).tabs();
-  } );
+  <script>
+      $( function() {
+        $( "#tabs" ).tabs();
+      } );
   </script>
   <script>
           $(function () {
@@ -85,540 +125,540 @@
 
     <style>
         .select2-container--default .select2-selection--single .select2-selection__rendered{line-height: 100%;}
-.teklifalani {  display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: min-content min-content min-content min-content min-content min-content min-content min-content;
-  grid-auto-columns: 1fr;
-  gap: 0em 0em;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "fisno tasarim"
-    "belgeno cari"
-    "tarhi cariyetkili"
-    "sontarih odemeplani"
-    "saat satiselemani"
-    "doviz onay"
-    "aciklamalar sevkadresi"
-    "kaydet .";
-}
+        .teklifalani {  display: grid;
+          grid-template-columns: 50% 50%;
+          grid-template-rows: min-content min-content min-content min-content min-content min-content min-content min-content;
+          grid-auto-columns: 1fr;
+          gap: 0em 0em;
+          grid-auto-flow: row;
+          grid-template-areas:
+            "fisno tasarim"
+            "belgeno cari"
+            "tarhi cariyetkili"
+            "sontarih odemeplani"
+            "saat satiselemani"
+            "doviz onay"
+            "aciklamalar sevkadresi"
+            "kaydet .";
+        }
 
-.fisno {  display: grid;
-  grid-template-columns: 30% 70%;
-  grid-template-rows: 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "fisnolabel fisnovalue";
-  grid-area: fisno;
-}
+        .fisno {  display: grid;
+          grid-template-columns: 30% 70%;
+          grid-template-rows: 1fr;
+          gap: 0px 0px;
+          grid-auto-flow: row;
+          grid-template-areas:
+            "fisnolabel fisnovalue";
+          grid-area: fisno;
+        }
 
-.fisnolabel {
-  justify-self: start;
-  align-self: center;
-  grid-area: fisnolabel;
-}
+        .fisnolabel {
+          justify-self: start;
+          align-self: center;
+          grid-area: fisnolabel;
+        }
 
-.fisnovalue {
-  justify-self: start;
-  align-self: center;
-  grid-area: fisnovalue;
-}
+        .fisnovalue {
+          justify-self: start;
+          align-self: center;
+          grid-area: fisnovalue;
+        }
 
-.belgeno {  display: grid;
-  grid-template-columns: 30% 70%;
-  grid-template-rows: 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "belgenolabel belgenovalue";
-  grid-area: belgeno;
-}
+        .belgeno {  display: grid;
+          grid-template-columns: 30% 70%;
+          grid-template-rows: 1fr;
+          gap: 0px 0px;
+          grid-auto-flow: row;
+          grid-template-areas:
+            "belgenolabel belgenovalue";
+          grid-area: belgeno;
+        }
 
-.belgenolabel {
-  justify-self: start;
-  align-self: center;
-  grid-area: belgenolabel;
-}
+        .belgenolabel {
+          justify-self: start;
+          align-self: center;
+          grid-area: belgenolabel;
+        }
 
-.belgenovalue {
-  justify-self: start;
-  align-self: center;
-  grid-area: belgenovalue;
-}
+        .belgenovalue {
+          justify-self: start;
+          align-self: center;
+          grid-area: belgenovalue;
+        }
 
-.tarhi {  display: grid;
-  grid-template-columns: 30% 70%;
-  grid-template-rows: 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "tarihlabel tarihvalue";
-  grid-area: tarhi;
-}
+        .tarhi {  display: grid;
+          grid-template-columns: 30% 70%;
+          grid-template-rows: 1fr;
+          gap: 0px 0px;
+          grid-auto-flow: row;
+          grid-template-areas:
+            "tarihlabel tarihvalue";
+          grid-area: tarhi;
+        }
 
-.tarihlabel {
-  justify-self: start;
-  align-self: center;
-  grid-area: tarihlabel;
-}
+        .tarihlabel {
+          justify-self: start;
+          align-self: center;
+          grid-area: tarihlabel;
+        }
 
-.tarihvalue {
-  justify-self: start;
-  align-self: center;
-  grid-area: tarihvalue;
-}
+        .tarihvalue {
+          justify-self: start;
+          align-self: center;
+          grid-area: tarihvalue;
+        }
 
-.sontarih {  display: grid;
-  grid-template-columns: 30% 70%;
-  grid-template-rows: 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "sontarihlabel sontarihvalue";
-  grid-area: sontarih;
-}
+        .sontarih {  display: grid;
+          grid-template-columns: 30% 70%;
+          grid-template-rows: 1fr;
+          gap: 0px 0px;
+          grid-auto-flow: row;
+          grid-template-areas:
+            "sontarihlabel sontarihvalue";
+          grid-area: sontarih;
+        }
 
-.sontarihlabel {
-  justify-self: start;
-  align-self: center;
-  grid-area: sontarihlabel;
-}
+        .sontarihlabel {
+          justify-self: start;
+          align-self: center;
+          grid-area: sontarihlabel;
+        }
 
-.sontarihvalue {
-  justify-self: start;
-  align-self: center;
-  grid-area: sontarihvalue;
-}
+        .sontarihvalue {
+          justify-self: start;
+          align-self: center;
+          grid-area: sontarihvalue;
+        }
 
-.saat {  display: grid;
-  grid-template-columns: 30% 70%;
-  grid-template-rows: 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "saatlabel saatvalue";
-  grid-area: saat;
-}
+        .saat {  display: grid;
+          grid-template-columns: 30% 70%;
+          grid-template-rows: 1fr;
+          gap: 0px 0px;
+          grid-auto-flow: row;
+          grid-template-areas:
+            "saatlabel saatvalue";
+          grid-area: saat;
+        }
 
-.saatlabel {
-  justify-self: start;
-  align-self: center;
-  grid-area: saatlabel;
-}
+        .saatlabel {
+          justify-self: start;
+          align-self: center;
+          grid-area: saatlabel;
+        }
 
-.saatvalue {
-  justify-self: start;
-  align-self: center;
-  grid-area: saatvalue;
-}
+        .saatvalue {
+          justify-self: start;
+          align-self: center;
+          grid-area: saatvalue;
+        }
 
-.doviz {  display: grid;
-  grid-template-columns: 30% 70%;
-  grid-template-rows: 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "dovizlabel dovizs";
-  grid-area: doviz;
-}
+        .doviz {  display: grid;
+          grid-template-columns: 30% 70%;
+          grid-template-rows: 1fr;
+          gap: 0px 0px;
+          grid-auto-flow: row;
+          grid-template-areas:
+            "dovizlabel dovizs";
+          grid-area: doviz;
+        }
 
-.dovizlabel {
-  justify-self: start;
-  align-self: center;
-  grid-area: dovizlabel;
-}
+        .dovizlabel {
+          justify-self: start;
+          align-self: center;
+          grid-area: dovizlabel;
+        }
 
-.dovizs {  display: grid;
-  grid-template-columns: 100%;
-  grid-template-rows: 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "dovizadi";
-  justify-self: start;
-  grid-area: dovizs;
-}
+        .dovizs {  display: grid;
+          grid-template-columns: 100%;
+          grid-template-rows: 1fr;
+          gap: 0px 0px;
+          grid-auto-flow: row;
+          grid-template-areas:
+            "dovizadi";
+          justify-self: start;
+          grid-area: dovizs;
+        }
 
-.dovizadi {  display: grid;
-  grid-template-columns: 30% 70%;
-  grid-template-rows: 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "dovizadi2 dovizvalue";
-  justify-self: stretch;
-  align-self: center;
-  grid-area: dovizadi;
-}
+        .dovizadi {  display: grid;
+          grid-template-columns: 30% 70%;
+          grid-template-rows: 1fr;
+          gap: 0px 0px;
+          grid-auto-flow: row;
+          grid-template-areas:
+            "dovizadi2 dovizvalue";
+          justify-self: stretch;
+          align-self: center;
+          grid-area: dovizadi;
+        }
 
-.dovizadi2 {
-  align-self: center;
-  grid-area: dovizadi2;
-}
+        .dovizadi2 {
+          align-self: center;
+          grid-area: dovizadi2;
+        }
 
-.dovizvalue {
-  align-self: center;
-  grid-area: dovizvalue;
-}
+        .dovizvalue {
+          align-self: center;
+          grid-area: dovizvalue;
+        }
 
-.tasarim {  display: grid;
-  grid-template-columns: 30% 70%;
-  grid-template-rows: 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "tasarimlabel tasarimvalue";
-  grid-area: tasarim;
-}
+        .tasarim {  display: grid;
+          grid-template-columns: 30% 70%;
+          grid-template-rows: 1fr;
+          gap: 0px 0px;
+          grid-auto-flow: row;
+          grid-template-areas:
+            "tasarimlabel tasarimvalue";
+          grid-area: tasarim;
+        }
 
-.tasarimlabel {
-  justify-self: start;
-  align-self: center;
-  grid-area: tasarimlabel;
-}
+        .tasarimlabel {
+          justify-self: start;
+          align-self: center;
+          grid-area: tasarimlabel;
+        }
 
-.tasarimvalue {
-  justify-self: stretch;
-  align-self: center;
-  grid-area: tasarimvalue;
+        .tasarimvalue {
+          justify-self: stretch;
+          align-self: center;
+          grid-area: tasarimvalue;
   
-}
+        }
 
-.cari {  display: grid;
-  grid-template-columns: 30% 70%;
-  grid-template-rows: 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "carilabel carivalue";
-  grid-area: cari;
-}
+        .cari {  display: grid;
+          grid-template-columns: 30% 70%;
+          grid-template-rows: 1fr;
+          gap: 0px 0px;
+          grid-auto-flow: row;
+          grid-template-areas:
+            "carilabel carivalue";
+          grid-area: cari;
+        }
 
-.carilabel {
-  justify-self: start;
-  align-self: center;
-  grid-area: carilabel;
-}
+        .carilabel {
+          justify-self: start;
+          align-self: center;
+          grid-area: carilabel;
+        }
 
-.carivalue {
-  justify-self: stretch;
-  align-self: center;
-  grid-area: carivalue;
-  line-height: 100%;
-}
+        .carivalue {
+          justify-self: stretch;
+          align-self: center;
+          grid-area: carivalue;
+          line-height: 100%;
+        }
 
-.cariyetkili {  display: grid;
-  grid-template-columns: 30% 70%;
-  grid-template-rows: 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "cariyetkililabel cariyetkilivalue";
-  grid-area: cariyetkili;
-}
+        .cariyetkili {  display: grid;
+          grid-template-columns: 30% 70%;
+          grid-template-rows: 1fr;
+          gap: 0px 0px;
+          grid-auto-flow: row;
+          grid-template-areas:
+            "cariyetkililabel cariyetkilivalue";
+          grid-area: cariyetkili;
+        }
 
-.cariyetkililabel {
-  justify-self: start;
-  align-self: center;
-  grid-area: cariyetkililabel;
-}
+        .cariyetkililabel {
+          justify-self: start;
+          align-self: center;
+          grid-area: cariyetkililabel;
+        }
 
-.cariyetkilivalue {
-  align-self: center;
-  grid-area: cariyetkilivalue;
-}
+        .cariyetkilivalue {
+          align-self: center;
+          grid-area: cariyetkilivalue;
+        }
 
-.odemeplani {  display: grid;
-  grid-template-columns: 30% 70%;
-  grid-template-rows: 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "odemeplanilabel odemeplanivalue";
-  grid-area: odemeplani;
-}
+        .odemeplani {  display: grid;
+          grid-template-columns: 30% 70%;
+          grid-template-rows: 1fr;
+          gap: 0px 0px;
+          grid-auto-flow: row;
+          grid-template-areas:
+            "odemeplanilabel odemeplanivalue";
+          grid-area: odemeplani;
+        }
 
-.odemeplanilabel {
-  justify-self: start;
-  align-self: center;
-  grid-area: odemeplanilabel;
-}
+        .odemeplanilabel {
+          justify-self: start;
+          align-self: center;
+          grid-area: odemeplanilabel;
+        }
 
-.odemeplanivalue {
-  align-self: center;
-  grid-area: odemeplanivalue;
-}
+        .odemeplanivalue {
+          align-self: center;
+          grid-area: odemeplanivalue;
+        }
 
-.satiselemani {  display: grid;
-  grid-template-columns: 30% 70%;
-  grid-template-rows: 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "satiselemanilabel satiselemanivalue";
-  grid-area: satiselemani;
-}
+        .satiselemani {  display: grid;
+          grid-template-columns: 30% 70%;
+          grid-template-rows: 1fr;
+          gap: 0px 0px;
+          grid-auto-flow: row;
+          grid-template-areas:
+            "satiselemanilabel satiselemanivalue";
+          grid-area: satiselemani;
+        }
 
-.satiselemanilabel {
-  justify-self: start;
-  align-self: center;
-  grid-area: satiselemanilabel;
-}
+        .satiselemanilabel {
+          justify-self: start;
+          align-self: center;
+          grid-area: satiselemanilabel;
+        }
 
-.satiselemanivalue {
-  align-self: center;
-  grid-area: satiselemanivalue;
-}
+        .satiselemanivalue {
+          align-self: center;
+          grid-area: satiselemanivalue;
+        }
 
-.kaydet {  display: grid;
-  grid-template-columns: 0.9fr 1.1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "button . ."
-    "button . ."
-    ". . .";
-  grid-area: kaydet;
-}
+        .kaydet {  display: grid;
+          grid-template-columns: 0.9fr 1.1fr 1fr;
+          grid-template-rows: 1fr 1fr 1fr;
+          gap: 0px 0px;
+          grid-auto-flow: row;
+          grid-template-areas:
+            "button . ."
+            "button . ."
+            ". . .";
+          grid-area: kaydet;
+        }
 
-.button { grid-area: button; }
+        .button { grid-area: button; }
 
-.aciklamalar {  display: grid;
-  grid-template-columns: 0.9fr 1.1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "aciklamalabel aciklamavalues aciklamavalues"
-    "aciklamalabel aciklamavalues aciklamavalues"
-    "aciklamalabel aciklamavalues aciklamavalues";
-  grid-area: aciklamalar;
-}
+        .aciklamalar {  display: grid;
+          grid-template-columns: 0.9fr 1.1fr 1fr;
+          grid-template-rows: 1fr 1fr 1fr;
+          gap: 0px 0px;
+          grid-auto-flow: row;
+          grid-template-areas:
+            "aciklamalabel aciklamavalues aciklamavalues"
+            "aciklamalabel aciklamavalues aciklamavalues"
+            "aciklamalabel aciklamavalues aciklamavalues";
+          grid-area: aciklamalar;
+        }
 
-.aciklamalabel {
-  justify-self: start;
-  align-self: start;
-  grid-area: aciklamalabel;
-}
+        .aciklamalabel {
+          justify-self: start;
+          align-self: start;
+          grid-area: aciklamalabel;
+        }
 
-.aciklamavalues {  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "aciklamavalue1"
-    "aciklamavalue2"
-    "aciklamavalue3";
-  grid-area: aciklamavalues;
-}
+        .aciklamavalues {  display: grid;
+          grid-template-columns: 1fr;
+          grid-template-rows: 1fr 1fr 1fr;
+          gap: 0px 0px;
+          grid-auto-flow: row;
+          grid-template-areas:
+            "aciklamavalue1"
+            "aciklamavalue2"
+            "aciklamavalue3";
+          grid-area: aciklamavalues;
+        }
 
-.aciklamavalue1 { grid-area: aciklamavalue1; }
+        .aciklamavalue1 { grid-area: aciklamavalue1; }
 
-.aciklamavalue2 { grid-area: aciklamavalue2; }
+        .aciklamavalue2 { grid-area: aciklamavalue2; }
 
-.aciklamavalue3 { grid-area: aciklamavalue3; }
+        .aciklamavalue3 { grid-area: aciklamavalue3; }
 
-.sevkadresi {  display: grid;
-  grid-template-columns: 0.9fr 1.1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "sevkadresilabel sevkvalues sevkvalues"
-    "sevkadresilabel sevkvalues sevkvalues"
-    "sevkadresilabel sevkvalues sevkvalues";
-  grid-area: sevkadresi;
-}
+        .sevkadresi {  display: grid;
+          grid-template-columns: 0.9fr 1.1fr 1fr;
+          grid-template-rows: 1fr 1fr 1fr;
+          gap: 0px 0px;
+          grid-auto-flow: row;
+          grid-template-areas:
+            "sevkadresilabel sevkvalues sevkvalues"
+            "sevkadresilabel sevkvalues sevkvalues"
+            "sevkadresilabel sevkvalues sevkvalues";
+          grid-area: sevkadresi;
+        }
 
-.sevkadresilabel {
-  justify-self: start;
-  align-self: start;
-  grid-area: sevkadresilabel;
-}
+        .sevkadresilabel {
+          justify-self: start;
+          align-self: start;
+          grid-area: sevkadresilabel;
+        }
 
-.sevkvalues {  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "sevkvalue1"
-    "sevkvalue2"
-    "sevkvalue3";
-  grid-area: sevkvalues;
-}
+        .sevkvalues {  display: grid;
+          grid-template-columns: 1fr;
+          grid-template-rows: 1fr 1fr 1fr;
+          gap: 0px 0px;
+          grid-auto-flow: row;
+          grid-template-areas:
+            "sevkvalue1"
+            "sevkvalue2"
+            "sevkvalue3";
+          grid-area: sevkvalues;
+        }
 
-.sevkvalue1 { grid-area: sevkvalue1; }
+        .sevkvalue1 { grid-area: sevkvalue1; }
 
-.sevkvalue2 { grid-area: sevkvalue2; }
+        .sevkvalue2 { grid-area: sevkvalue2; }
 
-.sevkvalue3 { grid-area: sevkvalue3; }
+        .sevkvalue3 { grid-area: sevkvalue3; }
 
-.onay {  display: grid;
-  grid-template-columns: 0.9fr 1.1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "onaylabel onayvalue onayvalue"
-    "onaylabel onayvalue onayvalue"
-    "onaylabel onayvalue onayvalue";
-  grid-area: onay;
-}
+        .onay {  display: grid;
+          grid-template-columns: 0.9fr 1.1fr 1fr;
+          grid-template-rows: 1fr 1fr 1fr;
+          gap: 0px 0px;
+          grid-auto-flow: row;
+          grid-template-areas:
+            "onaylabel onayvalue onayvalue"
+            "onaylabel onayvalue onayvalue"
+            "onaylabel onayvalue onayvalue";
+          grid-area: onay;
+        }
 
-.onaylabel {
-  justify-self: start;
-  align-self: center;
-  grid-area: onaylabel;
-}
+        .onaylabel {
+          justify-self: start;
+          align-self: center;
+          grid-area: onaylabel;
+        }
 
-.onayvalue {
-  justify-self: start;
-  align-self: center;
-  grid-area: onayvalue;
-}
+        .onayvalue {
+          justify-self: start;
+          align-self: center;
+          grid-area: onayvalue;
+        }
 
 </style>
 
     <style>.kalemeditdelete {  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr;
-  grid-auto-columns: 1fr;
-  grid-auto-rows: 1fr;
-  gap: 0% 3%;
-  grid-auto-flow: row;
-  justify-content: center;
-  align-content: center;
-  justify-items: center;
-  align-items: center;
-  grid-template-areas:
-    "edit delete";
-}
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+      grid-auto-columns: 1fr;
+      grid-auto-rows: 1fr;
+      gap: 0% 3%;
+      grid-auto-flow: row;
+      justify-content: center;
+      align-content: center;
+      justify-items: center;
+      align-items: center;
+      grid-template-areas:
+        "edit delete";
+    }
 
-.edit {
-  justify-self: stretch;
-  grid-area: edit;
-}
+    .edit {
+      justify-self: stretch;
+      grid-area: edit;
+    }
 
-.delete {
-  justify-self: stretch;
-  align-self: center;
-  grid-area: delete;
-}
-</style>
+    .delete {
+      justify-self: stretch;
+      align-self: center;
+      grid-area: delete;
+    }
+    </style>
   
 
-   <style>.diger {  display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: min-content;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "ekalan1-2-3-4-5 ekalan6";
-}
+       <style>.diger {  display: grid;
+      grid-template-columns: 50% 50%;
+      grid-template-rows: min-content;
+      gap: 0px 0px;
+      grid-auto-flow: row;
+      grid-template-areas:
+        "ekalan1-2-3-4-5 ekalan6";
+    }
 
-.ekalan1-2-3-4-5 {  display: grid;
-  grid-template-columns: 30% 70%;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "ekalanlabel1 ekalanvalue1"
-    "ekalanlabel2 ekalanvalue2"
-    "ekalanlabel3 ekalanvalue3"
-    "ekalanlabel4 ekalanvalue4"
-    "ekalanlabel5 ekalanvalue5";
-  grid-area: ekalan1-2-3-4-5;
-}
+    .ekalan1-2-3-4-5 {  display: grid;
+      grid-template-columns: 30% 70%;
+      grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+      gap: 0px 0px;
+      grid-auto-flow: row;
+      grid-template-areas:
+        "ekalanlabel1 ekalanvalue1"
+        "ekalanlabel2 ekalanvalue2"
+        "ekalanlabel3 ekalanvalue3"
+        "ekalanlabel4 ekalanvalue4"
+        "ekalanlabel5 ekalanvalue5";
+      grid-area: ekalan1-2-3-4-5;
+    }
 
-.ekalanlabel1 {
-  justify-self: start;
-  align-self: center;
-  grid-area: ekalanlabel1;
-}
+    .ekalanlabel1 {
+      justify-self: start;
+      align-self: center;
+      grid-area: ekalanlabel1;
+    }
 
-.ekalanlabel2 {
-  justify-self: start;
-  align-self: center;
-  grid-area: ekalanlabel2;
-}
+    .ekalanlabel2 {
+      justify-self: start;
+      align-self: center;
+      grid-area: ekalanlabel2;
+    }
 
-.ekalanlabel3 {
-  justify-self: start;
-  align-self: center;
-  grid-area: ekalanlabel3;
-}
+    .ekalanlabel3 {
+      justify-self: start;
+      align-self: center;
+      grid-area: ekalanlabel3;
+    }
 
-.ekalanlabel4 {
-  justify-self: start;
-  align-self: center;
-  grid-area: ekalanlabel4;
-}
+    .ekalanlabel4 {
+      justify-self: start;
+      align-self: center;
+      grid-area: ekalanlabel4;
+    }
 
-.ekalanlabel5 {
-  justify-self: start;
-  align-self: center;
-  grid-area: ekalanlabel5;
-}
+    .ekalanlabel5 {
+      justify-self: start;
+      align-self: center;
+      grid-area: ekalanlabel5;
+    }
 
-.ekalanvalue1 {
-  align-self: center;
-  grid-area: ekalanvalue1;
-}
+    .ekalanvalue1 {
+      align-self: center;
+      grid-area: ekalanvalue1;
+    }
 
-.ekalanvalue2 {
-  align-self: center;
-  grid-area: ekalanvalue2;
-}
+    .ekalanvalue2 {
+      align-self: center;
+      grid-area: ekalanvalue2;
+    }
 
-.ekalanvalue3 {
-  align-self: center;
-  grid-area: ekalanvalue3;
-}
+    .ekalanvalue3 {
+      align-self: center;
+      grid-area: ekalanvalue3;
+    }
 
-.ekalanvalue4 {
-  align-self: center;
-  grid-area: ekalanvalue4;
-}
+    .ekalanvalue4 {
+      align-self: center;
+      grid-area: ekalanvalue4;
+    }
 
-.ekalanvalue5 {
-  align-self: center;
-  grid-area: ekalanvalue5;
-}
+    .ekalanvalue5 {
+      align-self: center;
+      grid-area: ekalanvalue5;
+    }
 
-.ekalan6 {  display: grid;
-  grid-template-columns: 30% 70%;
-  grid-template-rows: 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "ekalanlabel6 ekalanvalue6";
-  grid-area: ekalan6;
-}
+    .ekalan6 {  display: grid;
+      grid-template-columns: 30% 70%;
+      grid-template-rows: 1fr;
+      gap: 0px 0px;
+      grid-auto-flow: row;
+      grid-template-areas:
+        "ekalanlabel6 ekalanvalue6";
+      grid-area: ekalan6;
+    }
 
-.ekalanlabel6 {  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "ekalanlabel66"
-    "."
-    "."
-    "."
-    ".";
-  grid-area: ekalanlabel6;
-}
+    .ekalanlabel6 {  display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+      gap: 0px 0px;
+      grid-auto-flow: row;
+      grid-template-areas:
+        "ekalanlabel66"
+        "."
+        "."
+        "."
+        ".";
+      grid-area: ekalanlabel6;
+    }
 
-.ekalanlabel66 {
-  justify-self: start;
-  align-self: center;
-  grid-area: ekalanlabel66;
-}
+    .ekalanlabel66 {
+      justify-self: start;
+      align-self: center;
+      grid-area: ekalanlabel66;
+    }
 
-.ekalanvalue6 { grid-area: ekalanvalue6;height: 100% }
+    .ekalanvalue6 { grid-area: ekalanvalue6;height: 100% }
 
 
   </style>
@@ -640,105 +680,116 @@
       </ul>
   <div>
   <div id="tabs-1">
-      @*aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa*@
-      <div class="teklifalani">
-  <div class="fisno">
-    <div class="fisnolabel"><strong>Fiş No </strong></div>
-    <div class="fisnovalue"><input readonly asp-for="teklif.fisno" class="form-control" />
-    <span asp-validation-for="teklif.fisno" class="text-danger"></span></div>
-  </div>
-  <div class="belgeno">
-    <div class="belgenolabel"><strong>Belge No </strong></div>
-    <div class="belgenovalue"><input asp-for="teklif.belgeno" class="form-control" />
-    <span asp-validation-for="teklif.belgeno" class="text-danger"></span></div>
-  </div>
+    @*aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa*@
+              <div class="teklifalani">
+          <div class="fisno">
+            <div class="fisnolabel"><strong>Fiş No </strong></div>
+            <div class="fisnovalue"><input readonly asp-for="teklif.fisno" class="form-control" />
+            <span asp-validation-for="teklif.fisno" class="text-danger"></span></div>
+          </div>
+          <div class="belgeno">
+            <div class="belgenolabel"><strong>Belge No </strong></div>
+            <div class="belgenovalue"><input asp-for="teklif.belgeno" class="form-control" />
+            <span asp-validation-for="teklif.belgeno" class="text-danger"></span></div>
+          </div>
                             
-  <div class="tarhi">
-    <div class="tarihlabel"><strong>Tarih </strong></div>
-    <div class="tarihvalue" >@Html.TextBoxFor(model => model.teklif.tarih, new{type="date"}   )</div>
-  </div>
-  <div class="sontarih">
-    <div class="sontarihlabel"><strong>Geçerlilik Tarihi</strong></div>
-    <div class="sontarihvalue">@Html.TextBoxFor(model => model.teklif.teslimattarihi, new { type = "date" })</div>
-  </div>
-  <div class="saat">
-    <div class="saatlabel"><strong>Saat</strong></div>
-    <div class="saatvalue id="time" >@Html.TextBoxFor(model => model.teklif.saat, new { type = "time" })</div>
-  </div>
-  <div class="doviz">
-    <div class="dovizlabel"><strong>Döviz</strong></div>
-    <div class="dovizs">
-      <div class="dovizadi">
-        <div class="dovizadi2"><select asp-for="teklif._key_sis_doviz" asp-items="Model.Dovizs" class="form-control" > </select>
-                               <span asp-validation-for="teklif._key_sis_doviz" class="text-danger"></span></div>
-        <div class="dovizvalue"><input type="number" asp-for="teklif.dovizkuru" class="form-control" />
-                                <span asp-validation-for="teklif.dovizkuru" class="text-danger"></span></div>
-      </div>
-    </div>
-  </div>
-  <div class="tasarim">
-    <div class="tasarimlabel"><strong>Tasarım Adı</strong></div>
-    <div class="tasarimvalue" ><select class="browser-default custom-select" id="tasarim"asp-for="teklif._key_rpr_dinamik_raporparametreleri_getirs"asp-items="Model.Rpr_dinamik_raporparametreleri_getirs" class="form-control" >
-                    </select></div>
-  </div>
-  <div class="cari">
-    <div class="carilabel"><strong>Cari</strong></div>
-    <div class="carivalue"><select class="browser-default custom-select"id="cari" asp-for="teklif._key_scf_carikart" class="form-control" asp-items ="Model.Caris" >
-                    </select></div>
-  </div>
-  <div class="cariyetkili">
-    <div class="cariyetkililabel"><strong>Cari Yetkili</strong></div>
-    <div class="cariyetkilivalue"><select id="yetkili" asp-for="teklif._key_scf_carikart_yetkili" asp-items="Model.yetkili" class="form-control" ></select>
-                            <span asp-validation-for="teklif._key_scf_carikart_yetkili" class="text-danger"></span></div>
-  </div>
-  <div class="odemeplani">
-    <div class="odemeplanilabel"><strong>OdemePlani</strong></div>
-    <div class="odemeplanivalue"><select id="odemeplani" asp-for="teklif._key_scf_odeme_plani"class="form-control" asp-items ="Model.OdemePlanis"></select>
-            <span asp-validation-for="teklif._key_scf_odeme_plani" class="text-danger"></span></div>
-  </div>
-  <div class="satiselemani">
-    <div class="satiselemanilabel"><strong>Satış Elemanı</strong></div>
-    <div class="satiselemanivalue"><select id ="satiselemani" asp-for="teklif._key_satiselemanlari" class="form-control" asp-items ="Model.SatisEleman" ></select>
-             <span asp-validation-for="teklif._key_satiselemanlari" class="text-danger"></span></div>
-  </div>
-  <div class="kaydet">
-    <div class="button"></div>
-  </div>
+          <div class="tarhi">
+            <div class="tarihlabel"><strong>Tarih </strong></div>
+            <div class="tarihvalue" >@Html.TextBoxFor(model => model.teklif.tarih, new{type="date"}   )</div>
+          </div>
+          <div class="sontarih">
+            <div class="sontarihlabel"><strong>Geçerlilik Tarihi</strong></div>
+            <div class="sontarihvalue">@Html.TextBoxFor(model => model.teklif.teslimattarihi, new { type = "date" })</div>
+          </div>
+          <div class="saat">
+            <div class="saatlabel"><strong>Saat</strong></div>
+            <div class="saatvalue" id="time" >@Html.TextBoxFor(model => model.teklif.saat, new { type = "time" })</div>
+          </div>
+          <div class="doviz">
+            <div class="dovizlabel"><strong>Döviz</strong></div>
+            <div class="dovizs">
+              <div class="dovizadi">
+                <div class="dovizadi2"><select asp-for="teklif._key_sis_doviz" asp-items="Model.Dovizs" class="form-control" > </select>
+                                       <span asp-validation-for="teklif._key_sis_doviz" class="text-danger"></span></div>
+                <div class="dovizvalue"><input type="number" asp-for="teklif.dovizkuru" class="form-control" />
+                                        <span asp-validation-for="teklif.dovizkuru" class="text-danger"></span></div>
+              </div>
+            </div>
+          </div>
+          <div class="tasarim">
+            <div class="tasarimlabel"><strong>Tasarım Adı</strong></div>
+            <div class="tasarimvalue" ><select class="browser-default custom-select" id="tasarim"asp-for="teklif._key_rpr_dinamik_raporparametreleri_getirs"asp-items="Model.Rpr_dinamik_raporparametreleri_getirs" class="form-control" >
+                            </select></div>
+          </div>
+          <div class="cari">
+            <div class="carilabel"><strong>Cari</strong></div>
+            <div class="carivalue"><select class="browser-default custom-select"id="cari" asp-for="teklif._key_scf_carikart" class="form-control" asp-items ="Model.Caris" >
+                            </select></div>
+          </div>
+          <div class="cariyetkili">
+            <div class="cariyetkililabel"><strong>Cari Yetkili</strong></div>
+            <div class="cariyetkilivalue"><select id="yetkili" asp-for="teklif._key_scf_carikart_yetkili" asp-items="Model.yetkili" class="form-control" ></select>
+                                    <span asp-validation-for="teklif._key_scf_carikart_yetkili" class="text-danger"></span></div>
+          </div>
+          <div class="odemeplani">
+            <div class="odemeplanilabel"><strong>OdemePlani</strong></div>
+            <div class="odemeplanivalue"><select id="odemeplani" asp-for="teklif._key_scf_odeme_plani"class="form-control" asp-items ="Model.OdemePlanis"></select>
+                    <span asp-validation-for="teklif._key_scf_odeme_plani" class="text-danger"></span></div>
+          </div>
+          <div class="satiselemani">
+            <div class="satiselemanilabel"><strong>Satış Elemanı</strong></div>
+            <div class="satiselemanivalue"><select id ="satiselemani" asp-for="teklif._key_satiselemanlari" class="form-control" asp-items ="Model.SatisEleman" ></select>
+                     <span asp-validation-for="teklif._key_satiselemanlari" class="text-danger"></span></div>
+          </div>
+          <div class="kaydet">
+            <div class="button"></div>
+          </div>
   
-  <div class="aciklamalar">
-    <div class="aciklamalabel"><strong>Aciklamalar</strong></div>
-    <div class="aciklamavalues">
-      <div class="aciklamavalue1"><input asp-for="teklif.aciklama1" class="form-control" />
-                                        <span asp-validation-for="teklif.aciklama1" class="text-danger"></span></div>
-      <div class="aciklamavalue2"><input asp-for="teklif.aciklama2" class="form-control" />
-                                        <span asp-validation-for="teklif.aciklama2" class="text-danger"></span></div>
-      <div class="aciklamavalue3"><input asp-for="teklif.aciklama3" class="form-control" />
-                                        <span asp-validation-for="teklif.aciklama3" class="text-danger"></span></div>
-    </div>
-  </div>
-  <div class="sevkadresi">
-    <div class="sevkadresilabel"><strong>SevkAdresi</strong></div>
-    <div class="sevkvalues">
-      <div class="sevkvalue1"><input asp-for="teklif.sevkadresi1" class="form-control" />
-                            <span asp-validation-for="teklif.sevkadresi1" class="text-danger"></span></div>
-      <div class="sevkvalue2"><input asp-for="teklif.sevkadresi2" class="form-control" />
-                            <span asp-validation-for="teklif.sevkadresi2" class="text-danger"></span></div>
-      <div class="sevkvalue3"><input asp-for="teklif.sevkadresi3" class="form-control" />
-                            <span asp-validation-for="teklif.sevkadresi3" class="text-danger"></span></div>
-    </div>
-  </div>
-  <div class="onay">
-    <div class="onaylabel"><strong>Onay</strong></div>
-    <div class="onayvalue"><select asp-for="teklif.onay" class="form-control" >
-                    <option>TEKLIF</option>
-                    <option>ANALIZ</option>
-                    <option>KABUL</option>
-                    <option>RET</option>
-                    </select>
-                    <span asp-validation-for="teklif.onay" class="text-danger"></span></div>
-  </div>
-</div>
-      @*aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa*@
+          <div class="aciklamalar">
+            <div class="aciklamalabel"><strong>Aciklamalar</strong></div>
+            <div class="aciklamavalues">
+              <div class="aciklamavalue1"><input asp-for="teklif.aciklama1" class="form-control" />
+                                                <span asp-validation-for="teklif.aciklama1" class="text-danger"></span></div>
+              <div class="aciklamavalue2"><input asp-for="teklif.aciklama2" class="form-control" />
+                                                <span asp-validation-for="teklif.aciklama2" class="text-danger"></span></div>
+              <div class="aciklamavalue3"><input asp-for="teklif.aciklama3" class="form-control" />
+                                                <span asp-validation-for="teklif.aciklama3" class="text-danger"></span></div>
+            </div>
+          </div>
+          <div class="sevkadresi">
+            <div class="sevkadresilabel"><strong>SevkAdresi</strong></div>
+            <div class="sevkvalues">
+              <div class="sevkvalue1">
+                                        <select id="adres" asp-for="teklif.sevkadresi1"  class="form-control" ></select>
+                                        <span asp-validation-for="teklif.sevkadresi1" class="text-danger"></span></div>
+              <div class="sevkvalue2"><input  asp-for="teklif.dinamik8" placeholder="Teslim Süresi" class="form-control" />
+                                    <span asp-validation-for="teklif.dinamik8" class="text-danger"></span></div>
+              <div class="sevkvalue3"><input  asp-for="teklif.dinamik10" placeholder="Teklif Geçerlilik Süresi" class="form-control" />
+                                    <span asp-validation-for="teklif.dinamik10" class="text-danger"></span></div>
+              <div class="sevkvalue4">
+                            <select asp-for="teklif.dinamik7" class="form-control" >
+                            <option>Nakliye Dahil, Montaj Dahil</option>
+                            <option>Nakliye Hariç, Montaj Hariç</option>
+                            <option>Nakliye Hariç, Montaj Dahil</option>
+                            <option>Nakliye Dahil, Montaj Hariç</option>
+                            </select></div>
+            </div>
+          </div>
+          <div class="onay">
+            <div class="onaylabel"><strong>Onay</strong></div>
+            <div class="onayvalue"><select asp-for="teklif.onay" class="form-control" >
+                            <option>TEKLIF</option>
+                            <option>ANALIZ</option>
+                            <option>KABUL</option>
+                            <option>RET</option>
+                            </select>
+                            <span asp-validation-for="teklif.onay" class="text-danger"></span></div>
+          </div>
+          <div>
+              
+          </div>
+        </div>
+              @*aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa*@
 
             
             

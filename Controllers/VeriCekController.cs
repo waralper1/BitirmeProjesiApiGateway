@@ -44,8 +44,8 @@ namespace BitirmeProjesiErp.Controllers
             Sabitler.seciliFirmaKodu = int.Parse(webServisBilgi.FirmaKod);
             Sabitler.seciliDonemKodu = int.Parse(webServisBilgi.DonemKod);
             #region CarileriVeriTabanınaYaz
-
-            dynamic response = Sabitler.sendMessageToServer(scf_carikart_listele(webServisBilgi), Sabitler.scfEk);
+            //dynamic response = Sabitler.sendMessageToServer(scf_carikart_listele(webServisBilgi), Sabitler.scfEk);
+            dynamic response = Sabitler.sendMessageToServer(scf_listele(webServisBilgi, "scf_carikart_listele"), Sabitler.scfEk);
             
 
             if (response == null)
@@ -114,8 +114,8 @@ namespace BitirmeProjesiErp.Controllers
             }
             #endregion
             #region StoklarıveriTabanınaYaz
-            dynamic stkresponse = Sabitler.sendMessageToServer(scf_stokkart_listele(webServisBilgi), Sabitler.scfEk);
-
+            //dynamic stkresponse = Sabitler.sendMessageToServer(scf_stokkart_listele(webServisBilgi), Sabitler.scfEk);
+            dynamic stkresponse = Sabitler.sendMessageToServer(scf_listele(webServisBilgi,"scf_stokkart_listele"), Sabitler.scfEk);
 
             if (stkresponse == null)
             {
@@ -189,7 +189,8 @@ namespace BitirmeProjesiErp.Controllers
             }
             #endregion
             #region scf_satiselemani_listele
-            dynamic stsresponse = Sabitler.sendMessageToServer(scf_satiselemani_listele(webServisBilgi), Sabitler.scfEk);
+            //dynamic stsresponse = Sabitler.sendMessageToServer(scf_satiselemani_listele(webServisBilgi), Sabitler.scfEk);
+            dynamic stsresponse = Sabitler.sendMessageToServer(scf_listele(webServisBilgi, "scf_satiselemani_listele"), Sabitler.scfEk);
 
 
             if (stsresponse == null)
@@ -272,8 +273,8 @@ namespace BitirmeProjesiErp.Controllers
             }
             #endregion
             #region scf_odeme_plani_listele
-            dynamic oplnresponse = Sabitler.sendMessageToServer(scf_odeme_plani_listele(webServisBilgi), Sabitler.scfEk);
-
+            //dynamic oplnresponse = Sabitler.sendMessageToServer(scf_odeme_plani_listele(webServisBilgi), Sabitler.scfEk);
+            dynamic oplnresponse = Sabitler.sendMessageToServer(scf_listele(webServisBilgi, "scf_odeme_plani_listele"), Sabitler.scfEk);
 
             if (oplnresponse == null)
             {
@@ -348,8 +349,8 @@ namespace BitirmeProjesiErp.Controllers
             }
             #endregion
             #region scf_carikart_adresleri_listele
-            dynamic calresponse = Sabitler.sendMessageToServer(scf_carikart_adresleri_listele(webServisBilgi), Sabitler.scfEk);
-
+            //dynamic calresponse = Sabitler.sendMessageToServer(scf_carikart_adresleri_listele(webServisBilgi), Sabitler.scfEk);
+            dynamic calresponse = Sabitler.sendMessageToServer(scf_listele(webServisBilgi, "scf_carikart_adresleri_listele"), Sabitler.scfEk);
 
             if (calresponse == null)
             {
@@ -430,8 +431,8 @@ namespace BitirmeProjesiErp.Controllers
             }
             #endregion
             #region scf_carikart_yetkili_listele
-            dynamic cyresponse = Sabitler.sendMessageToServer(scf_carikart_yetkili_listele(webServisBilgi), Sabitler.scfEk);
-
+            //dynamic cyresponse = Sabitler.sendMessageToServer(scf_carikart_yetkili_listele(webServisBilgi), Sabitler.scfEk);
+            dynamic cyresponse = Sabitler.sendMessageToServer(scf_listele(webServisBilgi, "scf_carikart_yetkili_listele"), Sabitler.scfEk);
 
             if (cyresponse == null)
             {
@@ -520,7 +521,8 @@ namespace BitirmeProjesiErp.Controllers
             }
             #endregion
             #region sis_doviz_listele
-            dynamic dresponse = Sabitler.sendMessageToServer(sis_doviz_listele(webServisBilgi), Sabitler.sisEk);
+            //dynamic dresponse = Sabitler.sendMessageToServer(sis_doviz_listele(webServisBilgi), Sabitler.sisEk);
+            dynamic dresponse = Sabitler.sendMessageToServer(scf_listele(webServisBilgi, "sis_doviz_listele"), Sabitler.sisEk);
 
 
             if (dresponse == null)
@@ -601,8 +603,8 @@ namespace BitirmeProjesiErp.Controllers
             }
             #endregion
             #region rpr_dinamik_raporparametreleri_getir
+            //dynamic rresponse = Sabitler.sendMessageToServer(rpr_dinamik_raporparametreleri_getir(webServisBilgi), Sabitler.rprEk);
             dynamic rresponse = Sabitler.sendMessageToServer(rpr_dinamik_raporparametreleri_getir(webServisBilgi), Sabitler.rprEk);
-
 
             if (rresponse == null)
             {
@@ -631,12 +633,12 @@ namespace BitirmeProjesiErp.Controllers
                 for (; i < orderArray.Length; i++)
                 {
                     string temp2 = orderArray[i][1];
-                    bool flag = await _scfcontext.Rpr_dinamik_raporparametreleri_getir.AnyAsync(x => x._key == temp2); // if _key exists flag==true
+                    bool flag = await _scfcontext.rpr_dinamik_raporparametreleri_getir.AnyAsync(x => x._key == temp2); // if _key exists flag==true
                     //r = await _scfcontext.Dovizs.FirstOrDefaultAsync(u => u._key == temp2);
                     if (flag)
                     {
                         
-                        Rpr_dinamik_raporparametreleri_getir tasarim = await _scfcontext.Rpr_dinamik_raporparametreleri_getir.FirstOrDefaultAsync(u => u._key == temp2);
+                        Rpr_dinamik_raporparametreleri_getir tasarim = await _scfcontext.rpr_dinamik_raporparametreleri_getir.FirstOrDefaultAsync(u => u._key == temp2);
                         var sontest = orderArray[i][1];
                         //tasarim._key = orderArray[k][1];
 
@@ -644,7 +646,7 @@ namespace BitirmeProjesiErp.Controllers
                         //tasarim.isim = orderArray[i + 1][1];i++;
 
 
-                        _scfcontext.Rpr_dinamik_raporparametreleri_getir.Update(tasarim);
+                        _scfcontext.rpr_dinamik_raporparametreleri_getir.Update(tasarim);
                         await _scfcontext.SaveChangesAsync();
                         try
                         {
@@ -666,7 +668,7 @@ namespace BitirmeProjesiErp.Controllers
                         tasarim.isim = Decoder(orderArray[i + 1][1]); i++;
 
                         //tasarim.isim = orderArray[i + 1][1]; i++;
-                        _scfcontext.Rpr_dinamik_raporparametreleri_getir.Add(tasarim);
+                        _scfcontext.rpr_dinamik_raporparametreleri_getir.Add(tasarim);
                         _scfcontext.SaveChanges();
                     }
                 }
@@ -688,20 +690,19 @@ namespace BitirmeProjesiErp.Controllers
             #endregion
             return Ok();
         }
-        public ExpandoObject scf_listele(WSModel webServisBilgi,string servis)
+        public IDictionary<String, Object> scf_listele(WSModel webServisBilgi,string servis)
         {
-            dynamic request = new ExpandoObject();
-            ((IDictionary<string, object>)request)[servis] = Sabitler.session_id;
-            request.scf_carikart_listele = new ExpandoObject();
-            request.scf_carikart_listele.session_id = Sabitler.session_id;
-            request.scf_carikart_listele.firma_kodu = int.Parse(webServisBilgi.FirmaKod);
-            request.scf_carikart_listele.donem_kodu = int.Parse(webServisBilgi.DonemKod);
-            Console.WriteLine(JsonConvert.SerializeObject(request));
-            return request;
+            var exo = new ExpandoObject() as IDictionary<String, Object>;
+            var nested1 = new ExpandoObject() as IDictionary<String, Object>;
 
+            exo.Add(servis, nested1);
+            nested1.Add("session_id", Sabitler.session_id);
+            nested1.Add("firma_kodu", int.Parse(webServisBilgi.FirmaKod));
+            nested1.Add("donem_kodu", int.Parse(webServisBilgi.DonemKod));
+            Console.WriteLine(JsonConvert.SerializeObject(exo));
 
-            Console.WriteLine(JsonConvert.SerializeObject(request));
-            return request;
+            return exo;
+
         }
         public ExpandoObject scf_satiselemani_listele(WSModel webServisBilgi)
         {

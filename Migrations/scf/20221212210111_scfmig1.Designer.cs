@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BitirmeProjesiErp.Migrations.scf
 {
     [DbContext(typeof(scfContext))]
-    [Migration("20221107103506_scfmig1")]
+    [Migration("20221212210111_scfmig1")]
     partial class scfmig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,6 +42,100 @@ namespace BitirmeProjesiErp.Migrations.scf
                     b.ToTable("CariKarts");
                 });
 
+            modelBuilder.Entity("BitirmeProjesiErp.Models.CariKartAdresler", b =>
+                {
+                    b.Property<string>("_key")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("_key_scf_carikart")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("adres1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("adres2")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("adresadi")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("carikartunvani")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("_key");
+
+                    b.ToTable("CariKartAdreslers");
+                });
+
+            modelBuilder.Entity("BitirmeProjesiErp.Models.CariKartYetkili", b =>
+                {
+                    b.Property<string>("_key")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("_key_scf_carikart")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("_key_sis_rehber_karti")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("adsoyad")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("carikartkodu")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ceptelno")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("gorev")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("istelno")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("kodu")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("_key");
+
+                    b.ToTable("CariKartYetkilis");
+                });
+
+            modelBuilder.Entity("BitirmeProjesiErp.Models.Doviz", b =>
+                {
+                    b.Property<string>("_key")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("adi")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("aktif")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("uzunadi")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("_key");
+
+                    b.ToTable("Dovizs");
+                });
+
             modelBuilder.Entity("BitirmeProjesiErp.Models.OdemePlani", b =>
                 {
                     b.Property<string>("_key")
@@ -67,7 +161,7 @@ namespace BitirmeProjesiErp.Migrations.scf
 
                     b.HasIndex("Teklif_key");
 
-                    b.ToTable("OdemePlani");
+                    b.ToTable("OdemePlanis");
                 });
 
             modelBuilder.Entity("BitirmeProjesiErp.Models.Rpr_dinamik_raporparametreleri_getir", b =>
@@ -81,7 +175,7 @@ namespace BitirmeProjesiErp.Migrations.scf
 
                     b.HasKey("_key");
 
-                    b.ToTable("Rpr_dinamik_raporparametreleri_getir");
+                    b.ToTable("rpr_dinamik_raporparametreleri_getir");
                 });
 
             modelBuilder.Entity("BitirmeProjesiErp.Models.SatisElemanlari", b =>
@@ -116,7 +210,7 @@ namespace BitirmeProjesiErp.Migrations.scf
 
                     b.HasIndex("Teklif_key");
 
-                    b.ToTable("SatisElemanlari");
+                    b.ToTable("SatisElemanlaris");
                 });
 
             modelBuilder.Entity("BitirmeProjesiErp.Models.StokKart", b =>
@@ -247,6 +341,18 @@ namespace BitirmeProjesiErp.Migrations.scf
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("dinamik10")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("dinamik7")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("dinamik8")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("dovizkuru")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -300,7 +406,6 @@ namespace BitirmeProjesiErp.Migrations.scf
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("rpr_dinamik_raporparametreleri_getirs_key")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("saat")
@@ -483,6 +588,26 @@ namespace BitirmeProjesiErp.Migrations.scf
                     b.ToTable("TeklifKalemis");
                 });
 
+            modelBuilder.Entity("BitirmeProjesiErp.Models.TeklifViewModel", b =>
+                {
+                    b.Property<string>("CariKart_key")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("carikey")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("teklif_key")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasIndex("CariKart_key");
+
+                    b.HasIndex("teklif_key");
+
+                    b.ToTable("TeklifViewModel");
+                });
+
             modelBuilder.Entity("BitirmeProjesiErp.Models.OdemePlani", b =>
                 {
                     b.HasOne("BitirmeProjesiErp.Models.Teklif", null)
@@ -507,9 +632,7 @@ namespace BitirmeProjesiErp.Migrations.scf
 
                     b.HasOne("BitirmeProjesiErp.Models.Rpr_dinamik_raporparametreleri_getir", "rpr_dinamik_raporparametreleri_getirs")
                         .WithMany()
-                        .HasForeignKey("rpr_dinamik_raporparametreleri_getirs_key")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("rpr_dinamik_raporparametreleri_getirs_key");
 
                     b.Navigation("CariKart");
 
@@ -531,6 +654,23 @@ namespace BitirmeProjesiErp.Migrations.scf
                         .IsRequired();
 
                     b.Navigation("StokKart");
+
+                    b.Navigation("teklif");
+                });
+
+            modelBuilder.Entity("BitirmeProjesiErp.Models.TeklifViewModel", b =>
+                {
+                    b.HasOne("BitirmeProjesiErp.Models.CariKart", "CariKart")
+                        .WithMany()
+                        .HasForeignKey("CariKart_key");
+
+                    b.HasOne("BitirmeProjesiErp.Models.Teklif", "teklif")
+                        .WithMany()
+                        .HasForeignKey("teklif_key")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CariKart");
 
                     b.Navigation("teklif");
                 });

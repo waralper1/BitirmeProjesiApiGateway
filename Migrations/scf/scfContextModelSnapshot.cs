@@ -27,12 +27,10 @@ namespace BitirmeProjesiErp.Migrations.scf
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Aktif")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("unvan")
                         .IsConcurrencyToken()
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("_key");
@@ -46,23 +44,18 @@ namespace BitirmeProjesiErp.Migrations.scf
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("_key_scf_carikart")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("adres1")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("adres2")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("adresadi")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("carikartunvani")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("_key");
@@ -76,54 +69,32 @@ namespace BitirmeProjesiErp.Migrations.scf
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("_key_scf_carikart")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("_key_sis_rehber_karti")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("adsoyad")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("carikartkodu")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ceptelno")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("gorev")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("istelno")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("kodu")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("_key");
 
                     b.ToTable("CariKartYetkilis");
-                });
-
-            modelBuilder.Entity("BitirmeProjesiErp.Models.Depo", b =>
-                {
-                    b.Property<string>("_key")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("depokodu")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("_key");
-
-                    b.ToTable("Depos");
                 });
 
             modelBuilder.Entity("BitirmeProjesiErp.Models.Doviz", b =>
@@ -132,15 +103,12 @@ namespace BitirmeProjesiErp.Migrations.scf
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("adi")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("aktif")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("uzunadi")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("_key");
@@ -154,16 +122,13 @@ namespace BitirmeProjesiErp.Migrations.scf
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Aciklama")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Aktif")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Kodu")
                         .IsConcurrencyToken()
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Teklif_key")
@@ -182,12 +147,11 @@ namespace BitirmeProjesiErp.Migrations.scf
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("isim")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("_key");
 
-                    b.ToTable("Rpr_dinamik_raporparametreleri_getir");
+                    b.ToTable("rpr_dinamik_raporparametreleri_getir");
                 });
 
             modelBuilder.Entity("BitirmeProjesiErp.Models.SatisElemanlari", b =>
@@ -199,23 +163,18 @@ namespace BitirmeProjesiErp.Migrations.scf
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("_key_scf_carikart")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("aciklama")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ceptel")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("durum")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("kodu")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("_key");
@@ -231,46 +190,23 @@ namespace BitirmeProjesiErp.Migrations.scf
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("aciklama")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("aktif")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("birimisimleri")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("birimkeyleri")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("stokkartkodu")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("_key");
 
                     b.ToTable("StokKarts");
-                });
-
-            modelBuilder.Entity("BitirmeProjesiErp.Models.Sube", b =>
-                {
-                    b.Property<string>("_key")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("subeadi")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("subekodu")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("_key");
-
-                    b.ToTable("Subes");
                 });
 
             modelBuilder.Entity("BitirmeProjesiErp.Models.Teklif", b =>
@@ -280,238 +216,189 @@ namespace BitirmeProjesiErp.Migrations.scf
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("_key_prj_proje")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("_key_rpr_dinamik_raporparametreleri_getirs")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("_key_satiselemanlari")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("_key_scf_carikart")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("_key_scf_carikart_adresleri")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("_key_scf_carikart_yetkili")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("_key_scf_odeme_plani")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("_key_sis_doviz")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("_key_sis_doviz_raporlama")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("_key_sis_sube_source")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("aciklama")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("aciklama1")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("aciklama2")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("aciklama3")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("aktarildi")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("bagkur")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("bagkurdvz")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("bagkuryuzde")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("belgeno")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("borsa")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("borsadvz")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("diafisno")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("diakey")
-                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("dinamik10")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("dinamik7")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("dinamik8")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("dovizkuru")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("dovizturu")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ekalan1")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ekalan2")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ekalan3")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ekalan4")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ekalan5")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ekalan6")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("fisno")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("odemeplaniaciklama")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("odemeplanikodu")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("onay")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("raporlamadovizkuru")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("rpr_dinamik_raporparametreleri_getirs_key")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("saat")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("sevkadresi1")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("sevkadresi2")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("sevkadresi3")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("tarih")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("teslimattarihi")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("tipi")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("toplam")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("toplamara")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("toplamaradvz")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("toplamdvz")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("toplamindirim")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("toplamindirimdvz")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("toplamkdv")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("toplamkdvdvz")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("toplamkdvtevkifati")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("toplamkdvtevkifatidvz")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("toplammasraf")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("toplammasrafdvz")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("toplamov")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("toplamovdvz")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("turu")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("_key");
@@ -530,63 +417,48 @@ namespace BitirmeProjesiErp.Migrations.scf
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("_key_kalemturu")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("_key_prj_proje")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("_key_scf_fiyatkart")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("_key_scf_odeme_plani")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("_key_scf_satiselemani")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("_key_scf_teklif")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("_key_sis_doviz")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("_key_sis_sube_source")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("birimadi")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("birimfiyati")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("dovizadi")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("dovizkuru")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("miktar")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("note")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("note2")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("teklif_key")
@@ -594,7 +466,6 @@ namespace BitirmeProjesiErp.Migrations.scf
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("tutari")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("_key");
@@ -612,7 +483,6 @@ namespace BitirmeProjesiErp.Migrations.scf
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("carikey")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("teklif_key")
@@ -624,16 +494,6 @@ namespace BitirmeProjesiErp.Migrations.scf
                     b.HasIndex("teklif_key");
 
                     b.ToTable("TeklifViewModel");
-                });
-
-            modelBuilder.Entity("BitirmeProjesiErp.Models.Varyant", b =>
-                {
-                    b.Property<string>("_key")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("_key");
-
-                    b.ToTable("Varyants");
                 });
 
             modelBuilder.Entity("BitirmeProjesiErp.Models.OdemePlani", b =>
@@ -654,9 +514,7 @@ namespace BitirmeProjesiErp.Migrations.scf
                 {
                     b.HasOne("BitirmeProjesiErp.Models.CariKart", "CariKart")
                         .WithMany()
-                        .HasForeignKey("_key_scf_carikart")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("_key_scf_carikart");
 
                     b.HasOne("BitirmeProjesiErp.Models.Rpr_dinamik_raporparametreleri_getir", "rpr_dinamik_raporparametreleri_getirs")
                         .WithMany()
@@ -671,9 +529,7 @@ namespace BitirmeProjesiErp.Migrations.scf
                 {
                     b.HasOne("BitirmeProjesiErp.Models.StokKart", "StokKart")
                         .WithMany()
-                        .HasForeignKey("_key_kalemturu")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("_key_kalemturu");
 
                     b.HasOne("BitirmeProjesiErp.Models.Teklif", "teklif")
                         .WithMany("TeklifKalemis")
