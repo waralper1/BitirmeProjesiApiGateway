@@ -291,11 +291,11 @@
  </style>
 
     </head>
-<div  style="width: 50%;  height: 50%">
+    <div  style="width: 50%;  height: 50%">
         <div class="card-header">
-                <h3 class="card-title">Kalem Düzenle</h3>
+                <h3 class="card-title">Kalem Ekle</h3>
               </div>
-        <form asp-action="KalemEdit">
+        <form asp-action="KalemCreate">
   <div asp-validation-summary="ModelOnly" class="text-danger"></div>
   
 
@@ -307,9 +307,9 @@
   </div>
   <div class="miktar-birim-doviz">
     <div class="miktar">
-      <div class="miktarlabel"><label asp-for="miktar" class="control-label">Birim</label></div>
-      <div class="miktarvalue"><input id="bfiyat" type="number" step="any" asp-for="birimfiyati" class="form-control" />
-                <span asp-validation-for="birimfiyati" class="text-danger"></span></div>
+      <div class="miktarlabel"><label asp-for="miktar" class="control-label">Birim Fiyatı</label></div>
+      <div class="miktarvalue"><input type="number" id="bfiyat" step="any" asp-for="birimfiyati" class="form-control" />
+                <span asp-validation-for="birimfiyati"  class="text-danger"></span></div>
     </div>
     <div class="birim">
       <div class="birimlabel"><label class="control-label">Miktar</label></div>
@@ -346,22 +346,61 @@
     
   </div>
   <div class="savebutton">
-    <div ><button asp-route-kalid="@Model._key" asp-route-id="@Model._key_scf_teklif" type="submit" class="btn btn-app bg-success">
+    <div ><button  asp-route-id="@Model._key_scf_teklif" type="submit" class="btn btn-app bg-success">
                           <i class="fas fa-save"></i> Kaydet
                         </button>
         
   </form></div>
   </div>
   <div class="tahmin">
-      <div class="tahminbutton"><button id="AddComment"runat="server" type="button" class="btn btn-app bg-secondary">
+      <div class="tahminbutton">
+          
+          <button id="AddComment"runat="server" type="button" class="btn btn-app bg-secondary">
                           <i class="fas fa-play"></i> Fiyat Getir
-                        </button></div>
+                        </button>
+          </div>
     <div class="tahminvalue"><div class="fiyattahmin"><div id="tahmin"></div></div>
     
   </div>
   
 </div>
 
+
+
+            
+
+@*<script>
+ $(function () {
+  $("#AddComment").click(function () {
+
+    var genislik = document.getElementById("genislik").value;
+    var boy = document.getElementById("boy").value;
+
+        $.ajax({
+            url: '@Url.Action("FiyatTahmin","Teklifs" )',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: {"genislik" :genislik,"boy":boy },
+            //error: alert("alpererror"),
+            success: function(response){
+                //alert(response);
+                document.getElementById("bfiyat").value = response;
+                    document.getElementById("tahmin").innerHTML = 
+                    "<p>Tahmini Birim Fiyatı: <strong>" + response + "</strong></p>"
+                    //                "<div class='media'>" +
+                    //                    "<div class='media-body'>" +
+                    //                        "<a href='' class='comment-author'>"+UserName+"</a>" +
+                    //                        "<span class='CommetText' id='CommentText-" + PostId + "'>" + CommentText + "</span>" +
+                    //                    "</div>" +
+                    //                "</div>" +
+                    //            "</li>"
+                    ;
+            }
+        });
+       
+});
+});
+</script>*@
 <script>
  $(function () {
   $("#AddComment").click(function () {
@@ -395,3 +434,17 @@
 });
 });
 </script>
+<script type="text/javascript">   
+function MyFunction()   
+{   
+  alert('Message');   
+
+  if (validationSucceeded) {
+    return true; //everythings ok, postback to server
+  } else {
+    return false; //cancel event to stop postback
+  }
+}   
+</script/>   
+  
+ 

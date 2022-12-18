@@ -25,10 +25,6 @@ namespace BitirmeProjesiErp.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Teklif>().ToTable("Teklif");
-            //modelBuilder.Entity<CariKart>().ToTable("CariKart");
-            //modelBuilder.Entity<TeklifKalemi>().HasKey(x => x._key);
-            //base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<TeklifKalemi>()
             .Property(p => p._key)
             .ValueGeneratedOnAdd();

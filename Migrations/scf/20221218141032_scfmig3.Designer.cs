@@ -3,6 +3,7 @@ using BitirmeProjesiErp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BitirmeProjesiErp.Migrations.scf
 {
     [DbContext(typeof(scfContext))]
-    partial class scfContextModelSnapshot : ModelSnapshot
+    [Migration("20221218141032_scfmig3")]
+    partial class scfmig3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -485,6 +487,7 @@ namespace BitirmeProjesiErp.Migrations.scf
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("teklif_key")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasIndex("CariKart_key");
@@ -546,7 +549,9 @@ namespace BitirmeProjesiErp.Migrations.scf
 
                     b.HasOne("BitirmeProjesiErp.Models.Teklif", "teklif")
                         .WithMany()
-                        .HasForeignKey("teklif_key");
+                        .HasForeignKey("teklif_key")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("CariKart");
 

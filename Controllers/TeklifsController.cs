@@ -86,16 +86,8 @@ namespace BitirmeProjesiErp.Controllers
             var odemeplan = await _scfcontext.OdemePlanis.FindAsync(TeklifViewModel.teklif._key_scf_odeme_plani);
             var kalemler = await _scfcontext.TeklifKalemis.Where(x => x._key_scf_teklif == id).ToListAsync();
             var doviz = await _scfcontext.Dovizs.FindAsync(TeklifViewModel.teklif._key_sis_doviz);
-
             var sevkadresi = await _scfcontext.CariKartAdreslers.FindAsync(TeklifViewModel.teklif._key_scf_carikart_adresleri);
-
-            //var yetkili = await _scfcontext.CariKartYetkilis.FindAsync(TeklifViewModel.teklif._key_scf_carikart);
-
             var cari = await _scfcontext.CariKarts.FindAsync(TeklifViewModel.teklif._key_scf_carikart);
-
-
-
-
             if (id != TeklifViewModel.teklif._key)
             {
                 return NotFound();
@@ -110,12 +102,9 @@ namespace BitirmeProjesiErp.Controllers
                     Sabitler.tekliftoplam += double.Parse(item.tutari, System.Globalization.CultureInfo.InvariantCulture);
                 }
 
-                //son kaldıgım yer burası, yareın adressleri adres adına gore otomatik getirip getirmeyeceğime karar vereceğim ahmet bey ile
-                // eN son burada kaldım, tekliften önemli olan alanları bırakıp diğerlerini commet alacagım
                 teklif._key_scf_carikart = TeklifViewModel.teklif._key_scf_carikart;
                 teklif.fisno = TeklifViewModel.teklif.fisno;
                 teklif._key_rpr_dinamik_raporparametreleri_getirs = TeklifViewModel.teklif._key_rpr_dinamik_raporparametreleri_getirs;
-                //teklif._key = TeklifViewModel.teklif._key;
                 teklif._key_prj_proje = TeklifViewModel.teklif._key_prj_proje;
                 teklif._key_scf_carikart = TeklifViewModel.teklif._key_scf_carikart;
                 teklif._key_satiselemanlari = TeklifViewModel.teklif._key_satiselemanlari;
@@ -392,5 +381,111 @@ namespace BitirmeProjesiErp.Controllers
             var adres = new SelectList(_scfcontext.CariKartAdreslers.Where(x => x._key_scf_carikart == id), "_key", "adresadi");
             return Json(adres);
         }//en son cari adresslerinide fatura adresi sevk adresi gibi sadece adres ismi seçilerek getirilecek şekilde yapacaktım. 
+        [HttpGet]
+        public async Task<IActionResult> KalemCreate(string? id)
+        {
+            var teklifKalemKart = new TeklifKalemi();
+            teklifKalemKart.StokKarts = new SelectList(_scfcontext.StokKarts, "_key", "aciklama");
+            teklifKalemKart.teklif = _scfcontext.Teklifs.Find(id);
+            teklifKalemKart._key_scf_teklif = id;
+
+
+            //var bisey = _scfcontext.Dovizs.Where(x => x.uzunadi == genislik);
+            //bisey = _scfcontext.Dovizs.Where(x => x.adi == boy);
+
+            ////sonc = bisey.GetEnumerator().Current._key;
+            //var sonc = bisey.FirstOrDefault();
+
+            //return Json(sonc._key);
+
+            return View(teklifKalemKart);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> KalemCreate(string? id, TeklifKalemi teklifKalemi)
+        {
+            //id = teklifKalemi.teklif._key;
+            var teklif = await _scfcontext.Teklifs.FirstOrDefaultAsync(u => u._key == id);
+            TeklifKalemi teklifKalemKart = new TeklifKalemi();
+
+
+            double miktar = double.Parse(teklifKalemi.miktar, System.Globalization.CultureInfo.InvariantCulture)
+                , birimfiyati = double.Parse(teklifKalemi.birimfiyati, System.Globalization.CultureInfo.InvariantCulture); ;
+            double tutar = miktar * birimfiyati;
+
+            //teklifKalemKart._key = "412";
+            teklifKalemKart._key_kalemturu = teklifKalemi._key_kalemturu;
+            teklifKalemKart._key_prj_proje = teklifKalemi._key_prj_proje;
+            teklifKalemKart._key_scf_satiselemani = teklif._key_satiselemanlari;//direkt tekliften geliyor.
+
+            teklifKalemKart._key_scf_fiyatkart = teklifKalemi._key_scf_fiyatkart;
+            teklifKalemKart._key_scf_odeme_plani = teklif._key_scf_odeme_plani;//direkt tekliften geliyor.
+
+            teklifKalemKart._key_scf_teklif = id;
+            teklifKalemKart._key_sis_doviz = teklifKalemi._key_sis_doviz;
+            teklifKalemKart._key_sis_sube_source = teklifKalemi._key_sis_sube_source;
+            teklifKalemKart.birimfiyati = teklifKalemi.birimfiyati;
+            teklifKalemKart.birimadi = teklifKalemi.birimadi;
+            teklifKalemKart.dovizadi = teklifKalemi.dovizadi;
+            teklifKalemKart.dovizkuru = teklifKalemi.dovizkuru;
+            teklifKalemKart.miktar = teklifKalemi.miktar;
+            teklifKalemKart.note = teklifKalemi.note;
+            teklifKalemKart.note2 = teklifKalemi.note2;
+            teklifKalemKart.tutari = tutar.ToString();
+
+            if (ModelState.IsValid)
+            {
+                _scfcontext.TeklifKalemis.Add(teklifKalemKart);
+                await _scfcontext.SaveChangesAsync();
+                return RedirectToAction("Edit", new { id = teklifKalemKart._key_scf_teklif });
+            }
+            return View(teklifKalemi);
+        }
+        [HttpGet]
+        public async Task<IActionResult> KalemEdit(string? id, string? kalid)
+        {
+
+            var teklifKalemKart = await _scfcontext.TeklifKalemis.FirstOrDefaultAsync(u => u._key == kalid);
+            teklifKalemKart.StokKarts = new SelectList(_scfcontext.StokKarts, "_key", "aciklama");
+            return View(teklifKalemKart);
+        }
+        [HttpPost]
+        public async Task<IActionResult> KalemEdit(string? id, string? kalid, TeklifKalemi teklifKalemi)// string? id,
+        {
+            var teklif = await _scfcontext.Teklifs.FirstOrDefaultAsync(u => u._key == id);
+            var teklifKalemKart = await _scfcontext.TeklifKalemis.FirstOrDefaultAsync(u => u._key == kalid);
+
+
+            double miktar = double.Parse(teklifKalemi.miktar, System.Globalization.CultureInfo.InvariantCulture)
+                , birimfiyati = double.Parse(teklifKalemi.birimfiyati, System.Globalization.CultureInfo.InvariantCulture); ;
+            double tutar = miktar * birimfiyati;
+
+
+            teklifKalemKart._key_kalemturu = teklifKalemi._key_kalemturu;
+            teklifKalemKart._key_prj_proje = teklifKalemi._key_prj_proje;
+            teklifKalemKart._key_scf_satiselemani = teklif._key_satiselemanlari;//direkt tekliften geliyor.
+
+            teklifKalemKart._key_scf_fiyatkart = teklifKalemi._key_scf_fiyatkart;
+            teklifKalemKart._key_scf_odeme_plani = teklif._key_scf_odeme_plani;
+
+            teklifKalemKart._key_scf_teklif = id;
+            teklifKalemKart._key_sis_doviz = teklifKalemi._key_sis_doviz;
+            teklifKalemKart._key_sis_sube_source = teklifKalemi._key_sis_sube_source;
+            teklifKalemKart.birimfiyati = teklifKalemi.birimfiyati;
+            teklifKalemKart.birimadi = teklifKalemi.birimadi;
+            teklifKalemKart.dovizadi = teklifKalemi.dovizadi;
+            teklifKalemKart.dovizkuru = teklifKalemi.dovizkuru;
+            teklifKalemKart.miktar = teklifKalemi.miktar;
+            teklifKalemKart.note = teklifKalemi.note;
+            teklifKalemKart.note2 = teklifKalemi.note2;
+            teklifKalemKart.tutari = tutar.ToString();
+
+
+            _scfcontext.TeklifKalemis.Update(teklifKalemKart);
+            _scfcontext.SaveChanges();
+            return RedirectToAction("Edit", "Teklifs", new { id = id });
+            //return View(teklifKalemKart);
+
+        }
     }
 }

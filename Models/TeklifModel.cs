@@ -11,12 +11,12 @@ namespace BitirmeProjesiErp.Models
     [Keyless]
     public class KalemViewModel
     {
-        public Teklif teklif { get; set; }
-        public /*List<CariKart>*/ IEnumerable<StokKart> stoks { get; set; }
+        public Teklif? teklif { get; set; }
+        public /*List<CariKart>*/ IEnumerable<StokKart>? stoks { get; set; }
         public /*IEnumerable<SelectListItem>*/string? stokkey { get; set; }
-        public /*List<TeklifKalemi>*/TeklifKalemi teklifKalemi { get; set; }
-        public /*List<CariKart>*/ IEnumerable<TeklifKalemi> teklifKalemis { get; set; }
-        public /*List<TeklifKalemi>*/IEnumerable<SelectListItem> Dovizs { get; set; }
+        public /*List<TeklifKalemi>*/TeklifKalemi? teklifKalemi { get; set; }
+        public /*List<CariKart>*/ IEnumerable<TeklifKalemi>? teklifKalemis { get; set; }
+        public /*List<TeklifKalemi>*/IEnumerable<SelectListItem>? Dovizs { get; set; }
 
     }
 
@@ -24,22 +24,22 @@ namespace BitirmeProjesiErp.Models
     public class TeklifViewModel
     {
 
-        public Teklif teklif { get; set; }
-        public ICollection<Teklif> teklifs { get; set; }
-        public /*List<CariKart>*/ IEnumerable<SelectListItem> Caris { get; set; }
-        public /*List<CariKart>*/ IEnumerable<SelectListItem> Rpr_dinamik_raporparametreleri_getirs { get; set; }
-        public /*List<CariKart>*/ IEnumerable<SelectListItem> OdemePlanis { get; set; }
+        public Teklif? teklif { get; set; }
+        public ICollection<Teklif>? teklifs { get; set; }
+        public /*List<CariKart>*/ IEnumerable<SelectListItem>? Caris { get; set; }
+        public /*List<CariKart>*/ IEnumerable<SelectListItem>? Rpr_dinamik_raporparametreleri_getirs { get; set; }
+        public /*List<CariKart>*/ IEnumerable<SelectListItem>? OdemePlanis { get; set; }
         public /*IEnumerable<SelectListItem>*/string? carikey { get; set; }
-        public /*List<TeklifKalemi>*/List<TeklifKalemi> TeklifKalemis { get; set; }
-        public /*List<TeklifKalemi>*/IEnumerable<SelectListItem> SatisEleman { get; set; }
-        public /*List<TeklifKalemi>*/IEnumerable<SelectListItem> Dovizs { get; set; }
-        public /*List<TeklifKalemi>*/IEnumerable<SelectListItem> Adress { get; set; }
+        public /*List<TeklifKalemi>*/List<TeklifKalemi>? TeklifKalemis { get; set; }
+        public /*List<TeklifKalemi>*/IEnumerable<SelectListItem>? SatisEleman { get; set; }
+        public /*List<TeklifKalemi>*/IEnumerable<SelectListItem>? Dovizs { get; set; }
+        public /*List<TeklifKalemi>*/IEnumerable<SelectListItem>? Adress { get; set; }
 
-        public /*List<TeklifKalemi>*/IEnumerable<SelectListItem> yetkili { get; set; }
+        public /*List<TeklifKalemi>*/IEnumerable<SelectListItem>? yetkili { get; set; }
 
-        public CariKart CariKart { get; set; }
-        public virtual ICollection<TeklifKalemi> TeklifKalemiss { get; set; }
-        public virtual ICollection<SatisElemanlari> SatisElemanlariss { get; set; }
+        public CariKart? CariKart { get; set; }
+        public virtual ICollection<TeklifKalemi>? TeklifKalemiss { get; set; }
+        public virtual ICollection<SatisElemanlari>? SatisElemanlariss { get; set; }
     }
     public class Teklif
     {
@@ -108,12 +108,12 @@ namespace BitirmeProjesiErp.Models
         public string? onay { get; set; }// Teklif/analiz/kabul/ret
         public string? odemeplaniaciklama { get; set; }
         public string? odemeplanikodu { get; set; }
-        public virtual ICollection<TeklifKalemi> TeklifKalemis { get; set; }
-        public virtual ICollection<SatisElemanlari> SatisElemanlaris { get; set; }
-        public virtual ICollection<OdemePlani> OdemePlanis { get; set; }
+        public virtual ICollection<TeklifKalemi>? TeklifKalemis { get; set; }
+        public virtual ICollection<SatisElemanlari>? SatisElemanlaris { get; set; }
+        public virtual ICollection<OdemePlani>? OdemePlanis { get; set; }
         public CariKart? CariKart { get; set; }
         public string? aktarildi { get; set; } = "0";
-        public virtual Rpr_dinamik_raporparametreleri_getir rpr_dinamik_raporparametreleri_getirs { get; set; }
+        public virtual Rpr_dinamik_raporparametreleri_getir? rpr_dinamik_raporparametreleri_getirs { get; set; }
         public string? diakey { get; set; }
         public string? diafisno { get; set; }
         public string? _key_rpr_dinamik_raporparametreleri_getirs { get; set; }
@@ -218,9 +218,9 @@ namespace BitirmeProjesiErp.Models
         public string? note2 { get; set; }
         public string? tutari { get; set; }
         [NotMapped]
-        public /*List<CariKart>*/ IEnumerable<SelectListItem> StokKarts { get; set; }
-        public StokKart StokKart { get; set; }
-        public Teklif teklif { get; set; }
+        public /*List<CariKart>*/ IEnumerable<SelectListItem>? StokKarts { get; set; }
+        public StokKart? StokKart { get; set; }
+        public Teklif? teklif { get; set; }
 
         #region relations
         //    T1._cdate,
