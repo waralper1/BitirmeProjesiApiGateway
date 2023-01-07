@@ -27,9 +27,12 @@ namespace BitirmeProjesiErp
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            
-            
-            
+            services.AddDbContext<FiyatlarContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
+
+
+
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 

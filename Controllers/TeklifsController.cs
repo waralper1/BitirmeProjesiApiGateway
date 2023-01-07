@@ -13,10 +13,12 @@ namespace BitirmeProjesiErp.Controllers
     public class TeklifsController : Controller
     {
         private readonly scfContext _scfcontext;
+        private readonly FiyatlarContext _fiyatlarcontext;
 
-        public TeklifsController(scfContext scfcontext)
+        public TeklifsController(scfContext scfcontext, FiyatlarContext fiyatlarcontext)
         {
             _scfcontext = scfcontext;
+            _fiyatlarcontext = fiyatlarcontext;
         }
 
         // GET: Teklifs teklif viewmodelini oluşturdumki cari kodundan cari alan
@@ -486,6 +488,36 @@ namespace BitirmeProjesiErp.Controllers
             return RedirectToAction("Edit", "Teklifs", new { id = id });
             //return View(teklifKalemKart);
 
+        }
+        public JsonResult FiyatTahmin(string genislik, string boy)
+        {
+            int yakingenislik;
+            int yakinboy;
+            int intgenislik = int.Parse(genislik);
+            int intboy = int.Parse(boy);
+            int indexgenislik = intgenislik / 250;//7
+            int indexboy = intboy / 250;//8
+            int kalangenislik = intgenislik % 250;
+            int kalanboy = intboy % 250;
+            if (kalangenislik >= 125)
+            {
+                yakingenislik = indexgenislik * 250 + 250;
+
+
+            }
+            else { yakingenislik = indexgenislik * 250; }
+            if (kalanboy >= 125)
+            {
+                yakinboy = indexboy * 250 + 250;
+
+            }
+            else { yakinboy = indexboy * 250; }
+            string key = yakingenislik.ToString() + yakinboy.ToString();
+            var tahminrow = _fiyatlarcontext.fiyat1.Find((key));
+            //var tahminrow = _fiyatlarcontext.fiyat1.Find((genislik + boy));
+
+
+            return Json(tahminrow.fiyat);
         }
     }
 }

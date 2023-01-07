@@ -57,6 +57,26 @@
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
+        <form enctype="multipart/form-data" method="post" asp-controller="WS" asp-action="Excell">
+    
+        
+            <label>Excel:</label>
+        
+        
+            <input type="file" name="FormFile" id="FormFile">
+
+            <select name='tablo' >
+                <option asp-route-tablo=1 value=1 >K-1</option>
+                <option asp-route-tablo=2 value=2 >K-5</option>
+                <option asp-route-tablo=3 value=3 >S-1 KUTU PRF.</option>
+                <option asp-route-tablo=4 value=4 >S-1 ALM. PRF.</option>
+                <option asp-route-tablo=5 value=5 >S-5 KUTU PRF.</option>
+                <option asp-route-tablo=6 value=6 >S-5 ALM. PRF.</option>
+
+            </select>
+    
+    <input  class="btn btn-warning" type="submit" value="Upload" />
+</form>
     </div>
 </div>
 
